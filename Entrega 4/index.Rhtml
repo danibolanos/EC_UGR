@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadística Computacional. Entrega 4.</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Draco is free PSD &amp; HTML template by @flamekaizar">
+    <meta name="author" content="Afnizar Nur Ghifari">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/kube.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/custom.min.css" />
+	<link rel="stylesheet" href="assets/arriba/fonts.css" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" />
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC:700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="assets/arriba/arriba.js"></script>
+	<style>
+		.intro h1:before {
+			/* Edit this with your name or anything else */
+			content: 'UGR';
+		}
+	</style>
+	<body bgcolor="#F7F8E0">
+</head>
+
+<span class="ir-arriba icon-arrow-up2"></span>
+
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+				    <span class="logo">DANI</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav">
+				    <ul>
+				        <li class="active"><a href="#about">Introducción</a></li>
+				        <li><a href="#funcs">Funciones distribución normal</a></li>
+				        <li><a href="#unif">Funciones distribución uniforme</a></li>
+				        <li><a href="#orden">Otras Distribuciones</a></li>
+						<li><a href="#estad">Estadística descriptiva</a></li>
+						<li><a href="#rock">Dataset "rock"</a></li>
+						<li><a href="#iris">Dataset "iris"</a></li>
+					    <li><a href="#test">El problema de las dos muestras</a></li>
+					    <li><a href="#regre">Regresión lineal</a></li>
+						<li><a href="#ref">Referencias</a></li>
+				    </ul>
+				</nav>
+			</header>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional : entrega 4</h1>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro section" id="about">
+		<div class="container">
+			<p>Alumno: Daniel Bolaños Martínez</p>
+			<div class="units-row units-split wrap">
+				<div class="unit-20">
+					<img src="assets/img/ava.jpg" alt="Avatar">
+				</div>
+				<div class="unit-80">
+					<h1>Introducción<br><span id="typed"></span></h1>					
+				</div>
+				<p>
+				En el siguiente documento se mostrará el trabajo realizado para la cuarta tarea de la asignatura Estadística Computacional 
+				durante el periodo no presencial.<br> <br/>
+				Se adjuntará el trabajo realizado sobre los ejemplos propuestos relativos al <b>Capítulo 7: Análisis estadísticos elementales</b>.<br> <br/>	
+				Se ha utilizado el lenguaje R sobre el software <i>Rstudio</i> en Windows.
+				</p>				
+			</div>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="funcs">
+		<div class="container">
+			<h1>Funciones distribución normal</h1>
+            <p>
+			
+                La distribución normal es el modelo continuo más importante en estadística, tanto por su aplicación, ya que permite describir muchas 
+				variables de interés general por dicho modelo, como por sus propiedades, que han permitido el desarrollo de 
+				numerosas técnicas de inferencia estadística.<br> <br/> 
+
+                Su función de densidad viene dada por la fórmula:
+				
+				<table border="1" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/devices.png" alt="densidad" >
+						</td>
+					</tr>
+				</table>
+                
+				la función, depende de μ (puede ser cualquier valor real) y σ (positivo). 
+				Por ello, indicaremos de forma abreviada que una variable X sigue la distribución normal: X ~ N(μ, σ). <br> <br/> 
+				
+				<body>
+					<font color="#0B0B61"><h3><a name="2.1">Función dnorm</a></h3></font>
+				</body>
+				
+                La función <b>dnorm</b> devuelve el valor de la función de densidad de la distribución normal dados los parámetros x, μ y σ.
+				Por defecto los parámetros toman el valor 0.<br> <br/> 
+
+                <!--begin.rcode
+                # Evaluaremos en x = 1 la función de densidad con mean = 0 y sd = 1
+                dnorm(1, mean = 0, sd = 1)
+                # Evaluamos la función sin parámetros
+                dnorm(0)
+                end.rcode-->
+				
+				<br> <br/> <hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="2.2">Función pnorm</a></h3></font>
+				</body>
+
+                La función <b>pnorm</b> nos permite calcular el área bajo la curva que representa la probabilidad de valores 
+				de una muestra que se encuentran antes o después (podemos especificarlo con el parámetro lower.tail) de un valor Xi. <br> <br/>
+				Es la función F(x) = P(X <= x).<br> <br/> 
+
+                <!--begin.rcode
+                # Vemos un ejemplo con mean = 5 y sd = 3 antes de Xi=2
+                pnorm(2, mean = 5, sd = 3)
+                # después de Xi=2
+                pnorm(2, mean = 5, sd = 3, lower.tail = FALSE)
+                # Toma por defecto mean = 0 y sd = 1
+                pnorm(3)
+                end.rcode-->
+				
+				<br> <br/> <hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="2.3">Función qnorm</a></h3></font>
+				</body>	
+				
+                La función <b>qnorm</b> se define como la inversa de <b>pnorm</b> o función cuantil. <br> <br/> 
+				Veamos un ejemplo, tomando el valor de Xi antes 
+				del cual se encuentra el 72% de los valores en la curva de densidad normal con μ = 10 y σ = 0.5:<br> <br/> 
+				
+                <!--begin.rcode
+                qnorm(0.72, mean=10, sd=0.5)
+                end.rcode-->
+				
+				<br> <br/>
+				
+				El resultado es el percentil 72, en el sentido de que el 72% de los valores en una población distribuida
+				normalmente con media 10 y desviación estándar 0.5 cubrirá ese valor.<br> <br/> 
+				
+				Otro ejemplo sin parámetros:<br> <br/> 
+
+                <!--begin.rcode
+                # Toma por defecto mean = 0 y sd = 1
+                qnorm(0.5)
+                end.rcode-->
+				
+				<br> <br/> <hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="2.4">Función Dibuja</a></h3></font>
+				</body>	
+
+                La función <b>Dibuja</b> implementada, representa las funciones de densidad y distribución de una normal.<br> <br/> 
+				El parámetro <b>n</b> indica el número de puntos que serán representados, mientras que los parámetros <b>fil</b> y <b>col</b>
+				establecen el número de las gráficas dibujadas con la función <b>par</b> con distinto número de puntos.<br> <br/> 
+                Finalmente, <b>dnorm</b> dibuja la función de densidad y <b>pnorm</b> la distribución.<br> <br/> 
+			  
+                <!--begin.rcode
+                Dibuja<-function(n=30, alfa=.001, fil=1, col=1)
+                  {
+                    # Dibuja la funcion de densidad
+                    # y la de distribucion de la normal
+                    n<-as.integer(n)
+                    if (n<10) stop("Hacen falta mas numeros")
+                    a<-qnorm(alfa)
+                    b<-qnorm(1-alfa)
+                    par(mfrow=c(fil,col))
+                    for (i in 1:(fil*col))
+                      {
+                        x<-seq(a,b,,i*n)
+                        plot(x,dnorm(x))
+                      }
+                    par(mfrow=c(fil,col))
+                    for (i in 1:(fil*col))
+                      {
+                        x<-seq(a,b,,i*n)
+                        plot(x,pnorm(x))
+                      }
+                  }
+                Dibuja()
+                end.rcode-->
+				
+                Utilizaremos un ejemplo para visualizar su funcionamiento para una distribución normal con alfa = 0.01,
+				dibujaremos dos gráficas (en fila) para la función de densidad con 50 y 100 puntos respectivamente y otras dos para la función de
+				distribución de igual forma.<br> <br/> 
+				
+                <!--begin.rcode
+                Dibuja(50, 0.01, 2, 1)
+                end.rcode-->
+			</p>
+		</div>
+	</div>
+				
+    <div class="work section second" id="unif">
+		<div class="container">
+			<h1>Funciones distribución uniforme</h1>
+            <p>				
+			
+                La distribución uniforme es el modelo (absolutamente) continuo más simple. 
+				Corresponde al caso de una variable aleatoria que sólo puede tomar valores comprendidos entre dos extremos a y b, 
+				de manera que todos los intervalos de una misma longitud dentro del intervalo (a,b), tienen la misma probabilidad.<br> <br/> 
+
+                Su función de densidad viene dada por la fórmula: 
+				
+				<table border="1" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/unif.png" alt="uniform" >
+						</td>
+					</tr>
+				</table>
+			
+				<body>
+					<font color="#0B0B61"><h3><a name="3.1">Funciones dunif, punif y qunif</a></h3></font>
+				</body>	
+				
+                A continuación veremos las funciones equivalentes a las estudiadas en el apartado anterior pero para una distribución uniforme:<br> <br/> 
+				
+                La función <b>dunif</b> devuelve las evaluaciones en la función de densidad para los valores correspondientes al vector 
+				pasado como parámetro.<br> <br/>  
+				
+				La función <b>punif</b> nos permite calcular el área bajo la curva que representa la probabilidad 
+				de valores de una muestra que se encuentran antes o después de un valor Xi.<br> <br/> 
+                
+				Finalmente la función <b>qunif</b> es la inversa de la función de distribución <b>punif</b>.<br> <br/> 
+				
+				Veamos algunos ejemplos de uso: <br> <br/> 
+				
+                <!--begin.rcode
+                dunif(seq(0, 100, by = 1) , min = 10, max = 50) 				
+                punif(seq(0, 100, by = 1), min = 10, max = 50)
+                qunif(seq(0, 1, by = 0.01), min = 10, max = 50)
+                end.rcode-->.
+				
+				<br> <br/> <hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.2">Función DibujaUniforme</a></h3></font>
+				</body>	
+				
+                Podemos observar las funciones de distribución y densidad en el intervalo (0,1) para la distribución uniforme.
+				Declaramos una función similar a la que usamos para la distribución normal, pero usando las funciones específicas
+				para la distribución uniforme.<br> <br/> 
+				
+                <!--begin.rcode
+                DibujaUniforme<-function(n=100, alfa=0.001, fil=1, col=1)
+                  {
+                    # Dibuja la funcion de densidad
+                    # y la de distribucion de la uniforme
+                    n<-as.integer(n)
+                    if (n<10) stop("Hacen falta mas numeros")
+                    a<-qunif(alfa)
+                    b<-qunif(1-alfa) 
+                    par(mfrow=c(fil,col))
+                    for (i in 1:(fil*col))
+                      {
+                        x<-seq(a,b,,i*n)
+                        plot(x,dunif(x))
+                      }
+                    par(mfrow=c(fil,col))
+                    for (i in 1:(fil*col))
+                      {
+                        x<-seq(a,b,,i*n)
+                        plot(x,punif(x))
+                      }
+                  }
+                DibujaUniforme()
+                end.rcode-->
+			</p>
+		</div>
+	</div>
+				
+	<div class="work section second" id="orden">
+		<div class="container">
+			<h1>Otras Distribuciones</h1>
+            <p>
+                Utilizaremos la orden <b>?Distributions</b> contenida en R para ver todas las distribuciones de las que disponemos
+				y elegiré la que más me guste. Podemos ver el resultado de la ejecución de la orden en el ordenador:
+				
+                <!--begin.rcode
+                # ?Distributions
+                end.rcode-->
+				
+				<table border="1" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/distributions.png" alt="distributions" >
+						</td>
+					</tr>
+				</table>
+				
+				<hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="4.1">Distribución de Poisson</a></h3></font>
+				</body>	
+				
+				La distribución que he elegido ha sido la de <b>Poisson</b>.<br> <br/> 
+				
+                Se trata de un modelo discreto, pero en el que el conjunto de valores con probabilidad no nula no es finito, 
+				sino numerable. Se dice que una variable aleatoria X sigue la distribución de <b>Poisson</b> si su función de densidad viene dada por:
+				
+				<table border="1" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/poisson.png" alt="poisson" >
+						</td>
+					</tr>
+				</table>
+				
+                como vemos, este modelo se caracteriza por un sólo parámetro λ, que debe ser positivo.<br> <br/>
+				
+                Podemos observar las funciones de distribución y densidad para la distribución de <b>Poisson</b> con λ=10.
+				Declaramos una función similar a la que usamos para la distribución normal, pero usando las funciones específicas
+				para la distribución de <b>Poisson</b>, en nuestro caso <b>dpois, ppois</b> y <b>qpois</b>.<br> <br/> 
+
+                <!--begin.rcode
+                DibujaPoisson<-function(n=100, alfa=0.001, fil=1, col=1, lambda=10)
+                  {
+                    # Dibuja la funcion de densidad
+                    # y la de distribucion de la Poisson
+                    n<-as.integer(n)
+                    if (n<10) stop("Hacen falta mas numeros")
+                    a<-qpois(alfa,lambda)
+                    b<-qpois(1-alfa,lambda)
+                    par(mfrow=c(fil,col))
+                    for (i in 1:(fil*col))
+                      {
+                        x<-seq(a,b,,i*n)
+                        x<-as.integer(x)
+                        plot(x,dpois(x,lambda))
+                      }    
+                    par(mfrow=c(fil,col))
+                    for (i in 1:(fil*col))
+                      {
+                        x<-seq(a,b,,i*n)
+                        plot(x,ppois(x,lambda))
+                      }
+                  }
+                DibujaPoisson()
+                end.rcode-->
+			</p>
+		</div>
+	</div>
+
+	<!-- Award & Achievements -->
+	<div class="work section second" id="estad">
+		<div class="container">
+			<h1>Estadística descriptiva</h1>
+			<p>
+			    Realizaré un análisis descriptivo sobre dos datasets diferentes utilizando diversas funciones y gráficos
+			    estudiadas a lo largo del manual. Los conjuntos de datos elegidos han sido:
+			
+			    <ol>
+                <li><b>Dataset rock</b>.</li>
+                <li><b>Dataset iris:</b> utilizado en la entrega anterior.</li>
+                </ol>
+			</p>
+		</div>
+	</div>
+					
+	<!-- Award & Achievements -->
+	<div class="work section second" id="rock">
+		<div class="container">
+			<h1>Dataset "rock"</h1>
+			<p>
+				El conjunto de datos elegido se llama <b>rock</b> y contiene 12 muestras de núcleos de yacimientos de petróleo 
+				muestreadas en 4 secciones transversales. Se midió la permeabilidad de cada muestra central y cada sección 
+				transversal, su área y perímetro total de poros y su forma.<br> <br/>
+				Las mediciones para las 48 muestras de roca organizadas en 4 columnas, representan:
+
+                <ol>
+                <li><b>area:</b> área del espacio de los poros, en píxeles de 256 por 256.</li>
+                <li><b>peri:</b> perímetro en píxeles.</li>
+                <li><b>shape:</b> perímetro/sqrt(área).</li>
+                <li><b>perm:</b> permeabilidad en mili-Darcies.</li>
+                </ol>
+				
+				Procederemos viendo las 10 primeras muestras del <b>dataset</b>:<br> <br/>
+				
+                <!--begin.rcode
+                head(rock, 10)
+				end.rcode-->
+				
+				A continuación realizaremos un análisis de las características generales del conjunto de datos, para ello
+				utilizaremos la orden <b>summary</b>.
+				
+				Podemos observar para cada medición, información relativa a los valores máximos y mínimos, cuartiles, media y mediana.<br> <br/>
+				
+                <!--begin.rcode
+                summary(rock)
+				end.rcode-->
+				
+				<br> <br/>
+				
+				Existen órdenes para calcular explícitamente la media y mediana de una medición en concreto, como podemos observar,
+				los valores coinciden con los obtenidos con la orden <b>summary</b> para la columna <b>area</b>.<br> <br/>
+				
+				También podemos calcular los cuantiles para cada medición a partir de la función <b>quantile</b> que devuelve
+				un vector con los cuantiles para determinadas probabilidades señaladas.<br> <br/>
+				
+                <!--begin.rcode
+                mean(rock$area)
+                median(rock$area)
+                quantile(rock$area)
+                quantile(rock$peri)
+                quantile(rock$shape)
+                quantile(rock$perm)
+				end.rcode-->
+				
+				<br> <br/>
+				
+				Procederemos también a representar las 4 mediciones en una matriz de dispersión donde podemos observar la
+				correlación de las diferentes medidas para cada muestra.<br> <br/>
+				
+               <!--begin.rcode
+                plot(rock)
+			    end.rcode-->
+				
+				También podemos dibujar un diagrama de sectores para la medición <b>perm</b> para ver como se distribuyen
+				las muestras de las rocas estudiadas, según su permeabilidad. Podemos ver que existe un porcentaje
+				equivalente de muestras para cada valor de permeabilidad observado.<br> <br/>
+				
+               <!--begin.rcode
+                pie(table(rock$perm))
+			    end.rcode-->
+				
+				Pintamos un histograma para la medición <b>area</b>, podemos notar que la mayoría de las muestras
+				tiene un área entre 6000 y 10000 píxeles al cuadrado. Este dato se confirma con el valor de la media y de la
+				mediana.<br> <br/>
+				
+               <!--begin.rcode
+                hist(rock$area, xlab="Área", ylab="Frecuencia")
+			    end.rcode-->
+				
+				A continuación dibujaremos dos tipos de diagramas de cajas diferentes, sin y con muescas (especificado con la 
+				la variable <b>notch</b>), los cuales nos muestran como están de dispersos los valores respecto a la mediana.<br> <br/>
+				
+               <!--begin.rcode
+                par(mfrow=c(1,2))
+                boxplot(rock$area, ylab="Área")
+                title(main=names(rock)[1], sub="Sin muescas")
+                boxplot(rock$peri, notch=T, ylab="Perímetro")
+                title(main=names(rock)[2], sub="Con muescas")
+			    end.rcode-->
+				
+				<br> <br/>
+				
+				A continuación mostraremos un diagrama de cajas con patillas para cada medición del conjunto de datos.<br> <br/>
+				
+               <!--begin.rcode
+                par(mfrow=c(1,4))
+                for (i in 1:4) {boxplot(rock[,i]) ;title(names(rock)[i])}
+			    end.rcode-->
+				 
+                También podemos calcular la varianza de diferentes variables, como en este caso que 
+				representamos la varianza del área, perímetro y forma de todas las muestras de rocas.<br> <br/>
+				
+               <!--begin.rcode
+                var(rock[,1:3])
+			    end.rcode-->
+				
+			   <br> <br/>
+				
+               Una gráfica <b>stem & leaf</b> organiza los puntos de datos por el valor de lugar de los primeros dígitos. 
+			   En este tipo de gráfico, cada pieza de datos es separada en dos partes. Los “stems” que 
+			   consisten de los dígitos en el valor de lugar común más grande de cada pieza de datos y los “leaves” que contienen los 
+			   otros dígitos de cada pieza de datos.<br> <br/>
+			   
+			   Para terminar mostraremos este tipo de gráfico para las variables <b>area</b> y <b>perm</b>.<br> <br/>
+				
+               <!--begin.rcode
+                stem(rock$area)
+                stem(rock$perm)
+			    end.rcode-->
+			</p>
+		</div>
+	</div>
+				
+	<!-- Award & Achievements -->
+	<div class="work section second" id="iris">
+		<div class="container">
+			<h1>Dataset "iris"</h1>
+			<p>
+                El conjunto de datos elegido se encuentra cargado en R y es el relativo al conjunto de datos <b>iris</b>. 
+				Es un conjunto de datos multivariante introducido por <b>Ronald Fisher</b> en un artículo de 1936 como un 
+				ejemplo de análisis discriminante lineal.<br> <br/>
+
+                Comencemos viendo el contenido de 10 muestras de los datos y el resumen de los resultados.
+
+                <!--begin.rcode
+                head(iris, 10)  
+                summary(iris)
+                end.rcode-->
+				
+				<br> <br/>	
+                      
+                El conjunto de datos contiene 50 muestras de cada una de tres especies de flor <b>Iris</b> (setosa, virginica y versicolor).
+				En él, se recogen las medidas de cuatro rasgos para cada muestra: el largo y ancho del sépalo y el largo y ancho del pétalo,
+				en centímetros. Basado en la combinación de estos cuatro rasgos, <b>Fisher</b> desarrolló un modelo discriminante lineal
+				para distinguir entre una especie y otra. <br> <br/>
+				
+				Para empezar, podemos mostrar un histograma de la frecuencia de una variable en el dataset, por ejemplo,
+				la longitud del sépalo. <br> <br/>
+				
+                <!--begin.rcode
+                hist(iris$Sepal.Length, xlab="Longitud del sépalo", ylab="Frecuencia", main="Histograma iris")
+                end.rcode-->
+				
+				<br> <br/>
+				
+                Haciendo un estudio general sobre como se relacionan dos características de las 4 que tenemos, podemos
+				observar por ejemplo que la longitud del pétalo y sépalo es directamente proporcional. Y que la anchura
+                del sépalo y pétalo, varían en un intervalo definido.<br> <br/>
+
+                <!--begin.rcode      
+                plot(x = iris$Sepal.Length, y = iris$Petal.Length)
+                lines(lowess(iris$Sepal.Length, iris$Petal.Length), col="red") 
+                end.rcode-->   
+
+                <!--begin.rcode      
+                plot(x = iris$Sepal.Width, y = iris$Petal.Width)
+                lines(lowess(iris$Sepal.Width, iris$Petal.Width), col="blue") 
+                end.rcode-->   				
+
+                <br> <br/>				
+				
+				Estas características nos servirán para poder clasificar los tres tipos de flores más adelante. <br> <br/>
+				
+                También podemos usar la función <b>pairs()</b> que nos informa sobre la correlación entre las variables del dataset.
+				Esta información se muestra como matriz de dispersión y permite ver como afectan las variables en la posterior
+				diferenciación de una especie y otra.<br> <br/>
+                                           
+                <!--begin.rcode      
+                panel.pearson <- function(x, y, ...) 
+                {
+                horizontal <- (par("usr")[1] + par("usr")[2]) / 2
+                vertical <- (par("usr")[3] + par("usr")[4]) / 2
+                text(horizontal, vertical, format(abs(cor(x,y)), digits=2))
+                }
+                pairs(iris[1:4], main = "Edgar Anderson's Iris Data", pch = 21, bg = c("red","green3","blue")[unclass(iris$Species)], upper.panel=panel.pearson)
+                end.rcode-->  
+
+                <br> <br/>	
+				
+				Pintamos la matriz de covarianzas para las 4 mediciones principales: los elementos de la diagonal de la matriz contienen las 
+				varianzas de las variables, mientras que los elementos que se encuentran fuera de la diagonal contienen 
+				las covarianzas entre todos los pares posibles de variables.<br> <br/>	
+
+                <!--begin.rcode      
+                var(iris[,1:4])
+				end.rcode--> 
+
+                <br> <br/>					
+
+                Seguidamente usaremos el gráfico <b>boxplot</b> para ver el rango en el que se mueven las distintas especies según la
+                anchura del sépalo y además las diferenciaremos por colores para hacerlo más visual. Podemos observar algunos
+				<b>outliers</b> para la variedad setosa.<br> <br/>
+                    
+                <!--begin.rcode      
+                boxplot(Sepal.Width ~ Species, iris, las=1, xaxt="n", lwd=2, xlab="Species", ylab="Sepal Width", cex.lab=1.3, cex.axis=1.3, col=c("blue","red","green")) 
+                axis(side=1, cex.lab=1.0, at=c(1.0,2.0,3.0), labels=c("IRSE", "IRVE", "IRVI"))
+                legend("top", cex=0.8, bty="n", title="Species", c("I. setosa","I. versicolor","I. virginica"), fill=c("blue", "red","green"))
+                end.rcode--> 
+
+                <br> <br/>
+
+                Podemos extraer un subconjunto de la matriz de dispersión y observar como afecta la diferencia entre la anchura del pétalo
+                y sépalo que ya habíamos notado antes en la clasificación de las flores. <br> <br/>				
+
+                <!--begin.rcode
+                plot(Petal.Width ~ Sepal.Width, iris) 
+                par(las=0)
+                points(Petal.Width ~ Sepal.Width, subset(iris,Species=="setosa"),pch=1, col="red")
+                points(Petal.Width ~ Sepal.Width, subset(iris,Species=="versicolor"),pch=10, col="green")
+                points(Petal.Width ~ Sepal.Width, subset(iris,Species=="virginica"),pch=19, col="blue")
+                title(xlab="Sepal Width", ylab="Petal Width", col.lab="red")
+                legend("topleft", cex=0.8, bty="n", title="Species", c("I. setosa","I. versicolor","I. virginica"), fill=c("blue", "red","green"))
+                end.rcode-->  
+				
+				<br> <br/>	
+
+                Para terminar mostraremos el gráfico <b>stem</b> para la variable longitud de pétalo.<br> <br/>
+
+                <!--begin.rcode
+                stem(iris$Petal.Length)
+                end.rcode-->  				
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="test">
+		<div class="container">
+			<h1>El problema de las dos muestras</h1>
+			<p>
+			
+			Revisaremos lo que hacen las funciones <b>test</b> en R gracias a la función <b>help</b>.<br> <br/>	
+			
+            La manera más cómoda, aunque indirecta, de obtener en R intervalos de confianza es a través de tests o contrastes de hipótesis.				
+            Si queremos conseguir un intervalo de confianza para la media de un conjunto de datos con varianza desconocida, 
+			usamos la función <b>t.test</b>, que es el test de la t de Student para una muestra.
+			
+			<hr>
+			
+				<body>
+					<font color="#0B0B61"><h3><a name="8.1">Función t.test</a></h3></font>
+				</body>	
+
+            La función <b>t.test</b> Realiza una y dos test-t de muestra en vectores de variables. <br> <br/>		
+			
+			Aplicado a una muestra se utiliza para comprobar si sigue una distribución normal de media indicada. Para este apartado utilizaremos 
+			el conjunto de datos <b>iris</b>.
+			Para el primer ejemplo, tomaremos como muestra la anchura del sépalo para la variedad virgínica de la flor.<br> <br/>
+
+            <!--begin.rcode
+            WidthSepal.Virginica<-iris[iris[,5]=="virginica",2]
+		    end.rcode-->
+			
+			<br> <br/>
+			
+			Calculamos la media de todo el conjunto en la medición <b>Sepal.Width</b> y realizaremos un test sobre la muestra <b>virginica</b>.<br> <br/>
+			La hipótesis inicial <b>H0</b> es que la media de la muestra es mayor que la de la población completa.<br> <br/>
+			
+            <!--begin.rcode
+            media1 <- mean(iris$Sepal.Width)
+            print("Media total:"); media1
+            t.test(WidthSepal.Virginica, mu=media1, alternative="less")
+            end.rcode-->
+			
+			<br> <br/>
+			
+			Como p < 0.05, podemos rechazar la hipótesis inicial con una confianza del 95%.<br> <br/>
+			
+			Para el segundo ejemplo, tomaremos como muestra la anchura del sépalo para la variedad setosa de la flor de <b>iris</b>.<br> <br/>
+
+            <!--begin.rcode
+            WidthSepal.Setosa<-iris[iris[,5]=="setosa",2]
+		    end.rcode-->
+			
+			<br> <br/>
+			
+            La hipótesis inicial <b>H0</b> es que la media de la muestra es mayor que la de la población completa.<br> <br/>
+			
+            <!--begin.rcode
+            t.test(WidthSepal.Setosa, mu=media1, alternative="less")
+            end.rcode-->
+			
+			<br> <br/>
+			
+			Como p > 0.05, no podemos rechazar la hipótesis inicial con una confianza del 95%.<br> <br/>
+			
+			Podemos acceder a las variables que devuelve la función <b>t.test</b> indicándolo de la forma siguiente:<br> <br/>
+			
+            <!--begin.rcode
+            # visualizamos las variables por separado t y p
+            t.test(WidthSepal.Setosa, mu=media1, alternative="less")[[1]]
+            t.test(WidthSepal.Setosa, mu=media1, alternative="less")[[3]]
+            end.rcode-->
+			
+			<br> <br/> <hr>
+				
+			En el caso de aplicar la función <b>t.test</b> sobre dos muestras, se utilizará para comprobar si dos poblaciones
+			que siguen una distribución normal, tendrán media equivalente.<br> <br/>
+			
+            Igual que se hace en el guión tomando muestras de vectores para el peso de hombres y mujeres, usaremos las dos muestras 
+			partiendo del dataset <b>iris</b> usado en el apartado anterior, pero esta vez para el ancho de sépalo 
+			en las variedades versicolor y virgínica.<br> <br/>	
+			
+			En este caso partimos de la hipótesis inicial <b>H0</b> que supone que las dos muestras tienen igual media.<br> <br/>
+			
+            Notamos previamente que uno de los supuestos para la prueba t es que las varianzas de las dos muestras son iguales. 
+			Sin embargo, se dice que una modificación de la prueba t conocida como prueba de <b>Welch</b> corrige este problema al estimar las 
+			variaciones y ajustar los grados de libertad para usar en la prueba. Esta corrección se realiza por defecto, pero se
+			puede eliminar con el argumento var.equal = TRUE.<br> <br/>
+                
+            <!--begin.rcode
+            WidthSepal.Versicolor<-iris[iris[,5]=="versicolor",2]
+            t.test(WidthSepal.Versicolor, WidthSepal.Virginica)
+            t.test(WidthSepal.Versicolor, WidthSepal.Virginica, var.equal=TRUE)
+            end.rcode-->
+			
+			<br> <br/>
+			
+			Podemos ver que el cambio en el parámetro no es muy significativo en cuanto a resultados.
+			En ambos casos p < 0.05, por lo que podemos rechazar la hipótesis inicial con una confianza del 95%.<br> <br/>
+			
+            <hr>
+			
+				<body>
+					<font color="#0B0B61"><h3><a name="8.2">Función var.test</a></h3></font>
+				</body>	
+				
+			Finalmente la función <b>var.test</b> sirve para comprobar la igualdad de varianzas entre dos grupos de datos.
+			Nos dispondremos a hacer una prueba de forma similar al <b>t.test</b> anterior.<br> <br/>
+			
+			En este caso partimos de la hipótesis inicial <b>H0</b> que supone que las dos muestras tienen igual varianza.<br> <br/>
+                
+            <!--begin.rcode
+            var.test(WidthSepal.Versicolor, WidthSepal.Virginica)
+            end.rcode-->
+			
+			<br> <br/>
+			
+			Como p > 0.05, no podemos rechazar la hipótesis inicial con una confianza del 95%.<br> <br/>
+			
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="regre">
+		<div class="container">
+			<h1>Regresión lineal</h1>
+			<p>
+				Para este apartado utilizaremos el conjunto de datos <b>rock</b>. Estudiaremos la regresión lineal entre dos variables. 
+				Viendo los puntos obtenidos mediante la matriz de dispersión en el apartado 2, vemos que las variables que mejor se ajustan 
+				a una recta son <b>area</b> y <b>perímetro</b>. <br> <br/>
+				
+				Esto parece evidente puesto que el área y perímetro de una roca son directamente proporcionales. Una vez elegidas las dos 
+				variables, procederemos a representar las gráficas y a estudiar la regresión lineal:
+              
+                <!--begin.rcode
+                plot(rock$area ~ rock$peri)
+                end.rcode-->
+				
+				<br> <br/>
+				
+				Estudiamos la regresión lineal haciendo uso de la función <b>lm</b>.<br> <br/>
+				
+                <!--begin.rcode
+                regresion <- lm(rock$area ~ rock$peri)
+                regresion
+                end.rcode-->
+				
+				<br> <br/>
+				
+				Si aplicamos la función <b>summary</b> a la regresión obtenida, podemos obtener información
+				más precisa acerca de los coeficientes y los residuos, así como del ajuste en mínimos cuadrados realizado.<br> <br/>
+				
+                <!--begin.rcode
+                summary(regresion)
+                end.rcode-->
+				
+				<br> <br/>
+				
+				La recta de regresión obtenida, puede ser representada en el gráfico que mostramos al inicio con la función <b>abline</b>.<br> <br/>
+
+                <!--begin.rcode
+                plot(rock$area ~ rock$peri)
+                abline(regresion)
+                end.rcode-->
+				
+				<br> <br/>
+				
+				Si llamamos a la función <b>plot</b> sobre la regresión devuelta por <b>lm</b>, podemos obtener información diversa en forma
+				de diferentes gráficos.<br> <br/>
+				
+                <!--begin.rcode
+                plot(regresion)
+                end.rcode-->
+				
+				<br> <br/>
+				
+				Podemos obtener información sobre los residuos con la función <b>residuals</b>. Nos aportará información sobre las diferencias 
+				entre las respuestas observadas en cada combinación de valores de las variables explicativas y la correspondiente 
+				predicción de la respuesta calculada utilizando 
+				la función de regresión. Además también podemos dibujar estas mediciones con <b>plot</b>.<br> <br/>
+				
+                <!--begin.rcode
+                residuos <- residuals(regresion)
+                residuos
+                plot(residuos)
+                end.rcode-->
+				
+				<br> <br/>
+				
+				Por último, también podemos obtener información sobre la predicción de los valores para la regresión lineal
+				realizada por la función <b>lm</b>, pudiendo conocer los valores predichos. En azul las predicciones y en rojo el valor original.<br> <br/>
+				
+                <!--begin.rcode
+                prediccion <- predict(regresion)
+                prediccion
+                plot(prediccion, col="blue")
+                points(rock$area, pch=1, col="red")
+                end.rcode-->
+				
+				<br> <br/>
+				
+				También podemos mostrar el coeficiente de regresión:<br> <br/>
+				
+                <!--begin.rcode
+                regresion$coef
+                end.rcode-->
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ref">
+		<div class="container">
+			<h1>Referencias</h1>
+			<p>
+				<div class="caja">
+					<div class="color">
+
+						<p>	Referencias utilizadas en el desarrollo de esta entrega: 
+						</p>
+					</div>
+					<p>
+					Web para la obtención de gráficos para los datos: 
+					<a href="https://www.r-bloggers.com/box-plot-with-r-tutorial/">
+						https://www.r-bloggers.com/box-plot-with-r-tutorial/
+					</a>
+					</p>
+					
+					<p>
+					Web con diversos datasets en R: 
+					<a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html">
+						https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html
+					</a>
+					</p>
+					
+					<p>
+					Información funciones densidad y distribución de una normal: 
+					<a href="http://seankross.com/notes/dpqr/">	
+                        http://seankross.com/notes/dpqr/
+					</a>
+					</p>
+					
+					<p>
+					Información funciones distribución uniforme: 
+					<a href="https://statisticsglobe.com/uniform-distribution-in-r-dunif-punif-qunif-runif">	
+                        https://statisticsglobe.com/uniform-distribution-in-r-dunif-punif-qunif-runif
+					</a>
+					</p>
+
+					<p>
+
+					Documento <i>'Curso R'</i> de la asignatura. 
+					
+					</p>	 
+				</div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional</h1>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="units-row">
+			    <div class="unit-50">
+			    	<p>Creado por Daniel Bolaños Martínez</p>
+			    </div>
+			    <div class="unit-50">
+					<ul class="social list-flat right">
+						<li><a href="mailto:danibolanos@correo.ugr.es"><i class="fa fa-send"></i></a></li>
+					</ul>
+			    </div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Javascript -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/typed.min.js"></script>
+    <script src="assets/js/kube.min.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script>
+		function newTyped(){}$(function(){$("#typed").typed({
+		// Change to edit type effect
+		strings: ["estadística", "computación"],
+
+		typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+    </script>
+</body>
+</html>

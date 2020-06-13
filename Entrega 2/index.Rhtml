@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadística Computacional. Entrega 2.</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Draco is free PSD &amp; HTML template by @flamekaizar">
+    <meta name="author" content="Afnizar Nur Ghifari">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/kube.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/custom.min.css" />
+	<link rel="stylesheet" href="assets/arriba/fonts.css" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" />
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC:700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="assets/arriba/arriba.js"></script>
+	<style>
+		.intro h1:before {
+			/* Edit this with your name or anything else */
+			content: 'UGR';
+		}
+	</style>
+	<body bgcolor="#F7F8E0">
+</head>
+
+<span class="ir-arriba icon-arrow-up2"></span>
+
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+				    <span class="logo">DANI</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav">
+				    <ul>
+				        <li class="active"><a href="#about">Introducción</a></li>
+				        <li><a href="#experiences">Configuración "knitr"</a></li>
+				        <li><a href="#achievements">Simulación con baraja</a></li>
+				        <li><a href="#dados">Ejemplo: Dados</a></li>
+						<li><a href="#monedas">Ejemplo: Moneda</a></li>
+					    <li><a href="#epi">Epígrafes 3.5.6-3.5.8</a></li>
+						<li><a href="#ext">Archivos externos</a></li>
+						<li><a href="#ref">Referencias</a></li>
+				    </ul>
+				</nav>
+			</header>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional : entrega 2</h1>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro section" id="about">
+		<div class="container">
+			<p>Alumno: Daniel Bolaños Martínez</p>
+			<div class="units-row units-split wrap">
+				<div class="unit-20">
+					<img src="assets/img/ava.jpg" alt="Avatar">
+				</div>
+				<div class="unit-80">
+					<h1>Introducción<br><span id="typed"></span></h1>					
+				</div>
+				<p>
+				En el siguiente documento se mostrará el trabajo realizado para la primera tarea de la asignatura Estadística Computacional durante el periodo no presencial.<br> <br/>
+				Se adjuntarán el código de los ejercicios propuestos y las gráficas generadas a partir de los datos proporcionados.	
+				</p>				
+			</div>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="experiences">
+		<div class="container">
+			<h1>Configuración "knitr"</h1>
+			<p>
+			Para generar el archivo html que utilizaremos para presentar los datos, deberemos
+			instalar y cargar el paquete "knitr" para R. <br> <br/>
+
+			Utilizaremos las siguientes órdenes para ello: 
+
+			<!--begin.rcode hola
+			# install.packages("knitr", dependencies = TRUE)
+			# library(knitr)
+			end.rcode-->
+
+			Para generar el archivo html, deberemos ejecutar la siguiente orden: <br> <br/>
+
+			<!--begin.rcode
+			# knit("danibolanos.Rhtml")
+			end.rcode-->
+			</p>
+		</div>
+	</div>
+
+	<!-- Award & Achievements -->
+	<div class="work section second" id="achievements">
+		<div class="container">
+			<h1>Simulación de una extracción de cartas de una baraja</h1>
+			<p>
+				Se hará una simulación del siguiente experimento: Realizar un muestreo con reemplazamiento de una baraja de 52 cartas, 
+				hasta obtener los cuatro ases e indicar el número de extracciones necesarias.
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.1">Con reemplazamiento</a></h3></font>
+				</body>
+
+				A continuación cargaremos la función <b>CuatroAses</b> y veremos su resultados para diferentes parámetros.<br> <br/>
+
+				<!--begin.rcode [metaórdenes]
+				CuatroAses = function(Mostrar = F,Maximo=1000)
+				{
+				###############################################################
+				# Pone los cuatro ases en 0 #
+				# Saca una carta de la baraja (52) #
+				# Suma uno al contador #
+				# Si no es un as (1) vuelve al principio del ciclo #
+				# El as correspondiente se pone en 1 #
+				# Si los cuatro ases son 1 termina el ciclo #
+				###############################################################
+				Extracciones = 0
+				Resultado = 1:Maximo
+				Ases = c(0,0,0,0)
+				repeat
+				{
+				  if (Maximo <= Extracciones )
+				  {
+					if(Mostrar)
+					{
+					  cat("No he podido obtener cuatro ases en ", Extracciones, "extracciones. \n")
+					}
+				  return(list(E = NA, R = Resultado, Conseguido=F))
+				}
+				  Extracciones = Extracciones + 1
+				  SacoUna = sample(52, 1)
+				  Resultado[Extracciones] = SacoUna
+				  if(SacoUna %% 13 != 1) {next}
+				  # %% es el m´odulo
+				  Ases[(SacoUna -1) %/% 13 + 1] = 1
+				  # %/% es la divisi´on entera
+				  if(sum(Ases)==4){break}
+				}
+				length(Resultado) = Extracciones
+				if(Mostrar)
+				{
+				  cat("He necesitado", Extracciones, "extracciones para obtener cuatro ases.\n")
+				}
+				return(list(E = Extracciones, R = Resultado, Conseguido=T))
+				}
+				end.rcode-->
+
+				Ejemplo mostrando los comentarios y con máximo 20 extracciones:<br> <br/>
+
+				<!--begin.rcode
+				CuatroAses(T,20)
+				end.rcode-->
+				
+				Ejemplo no mostrando los comentarios y con máximo 50 extracciones:<br> <br/>
+
+				<!--begin.rcode
+				CuatroAses(F,50)
+				end.rcode-->
+
+				Se puede utilizar el resultado de la función como entrada de otra función, 
+				para repetir varias veces la simulación y estudiar la distribución de la misma.<br> <br/>
+
+				<!--begin.rcode
+				DistriAses = function(n = 5,Maximo=1000)
+				{
+				Saco = vector(length=n)
+				for(i in 1:n)
+				  Saco[i] = CuatroAses(F,Maximo)$E
+				Saco
+				}
+				end.rcode-->
+
+				Mostraremos diversas ejecuciones para la función <b>DistriAses</b>. En el primer ejemplo 
+				se realizan 4 experimentos con un máximo de 100 extracciones y en el segundo 6 experimentos con un máximo de 80.<br> <br/>
+
+				<!--begin.rcode
+				DistriAses(4, 100)
+				end.rcode-->
+
+				<!--begin.rcode
+				DistriAses(6, 80)
+				end.rcode-->
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.2">Sin reemplazamiento</a></h3></font>
+				</body>
+
+				En el guión también podemos observar una función para realizar el experimento sin reemplazamiento con cada extracción.<br> <br/>
+
+				<!--begin.rcode
+				CuatroAses.Sin =function(Mostrar = F)
+				{
+				#############################################################
+				# Pone el contador de ases en 0 #
+				# Obtiene una permutaci´on de las cartas de la baraja #
+				# Si no es un as (1) pasa a la siguiente carta #
+				# Suma 1 al contador de ases #
+				# Si hay cuatro ases termina el ciclo #
+				#############################################################
+				Ases = 0
+				Resultado = sample(52)
+				for (i in 1:52)
+				{
+				  if(Resultado[i] %% 13 != 1) {next}
+				  # %% es el m´odulo
+				  Ases = Ases+1
+				  if(Ases==4) {break}
+				}
+				if(Mostrar)
+				{
+				  cat("He necesitado", i, "extracciones para obtener cuatro ases\n")
+				}
+				return(list(E = i,R = Resultado[1:i]))
+				}
+				end.rcode-->
+
+				Leemos la función <b>CuatroAses.Sin</b> y procedemos a ejecutar varias pruebas. 
+				Podemos ver que en esta ejecución tarda 33 extracciones en obtener los 4 ases de las 52 posibles.<br> <br/>
+
+				<!--begin.rcode
+				CuatroAses.Sin()
+				end.rcode-->
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.3">Con nombres</a></h3></font>
+				</body>
+
+				En este ejemplo se añaden los nombres de las cartas a cada una, de esta forma 
+				en vez de asignar un número a cada carta se le asigna el número y el palo correspondientes.<br> <br/>
+
+				<!--begin.rcode
+				CuatroAses.Nombres = function(Mostrar = F,Maximo=1000)
+				{
+				###############################################################
+				# Pone los cuatro ases en 0 #
+				# Saca una carta de la baraja (52) #
+				# Suma uno al contador #
+				# Si no es un as (1) vuelve al principio del ciclo #
+				# El as correspondiente se pone en 1 #
+				# Si los cuatro ases son 1 termina el ciclo #
+				###############################################################
+				Palos = c("Oros","Copas","Espadas","Bastos")
+				Cartas = c("As","Dos","Tres","Cuatro","Cinco",
+				"Seis","Siete","Ocho","Nueve","Diez",
+				"Sota","Caballo","Rey")
+				Extracciones = 0
+				Resultado = 1:Maximo
+				Ases = c(0,0,0,0)
+				Nombres = NA
+				repeat
+				{
+				  Extracciones = Extracciones + 1
+				  if (Maximo <= Extracciones )
+				  {
+					if(Mostrar)
+					{
+					  cat("No he podido obtener cuatro ases en ", Extracciones, "extracciones. \n")
+					}
+				  return(list(E = NA, R = Resultado, N=Nombres, Conseguido=F))
+				}
+				  SacoUna = sample(52, 1)
+				  Resultado[Extracciones] = SacoUna
+				  Palo = ((SacoUna-1) %/% 13 )+ 1
+				  Carta = ((SacoUna-1) %% 13)+1
+				  Nombres[Extracciones] = paste(Cartas[Carta]," de ", Palos[Palo])
+				  if(SacoUna %% 13 != 1) {next}
+				  # %% es el m´odulo
+				  Ases[(SacoUna -1) %/% 13 + 1] = 1
+				  # %/% es la divisi´on entera
+				  if(sum(Ases)==4) {break}
+				}
+				length(Resultado)=Extracciones
+				if(Mostrar)
+				{
+				  cat("He necesitado", Extracciones, "extracciones para obtener cuatro ases.\n")
+				}
+				  return(list(E = NA, R = Resultado, N=Nombres, Conseguido=T))
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				CuatroAses.Nombres(T,10)
+				end.rcode-->
+			</p>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="dados">
+		<div class="container">
+			<h1>Ejemplo: Dados</h1>
+			<p>
+				A continuación se presenta un ejemplo similar al de las cartas donde jugaremos con dos dados. 
+				La idea del experimento está basada en un juego de dados llamado <i>'Craps'</i> donde se juega con el valor obtenido en el lanzamiento de dados.<br> <br/>
+
+				En nuestro caso estudiaremos las probabilidades de obtener los denominados <i>'ojos de serpiente'</i> con los dados, 
+				es decir, un 2 como suma de dos dados o un 1 en cada dado. Este hecho en el juego puede ser muy bueno o muy malo dependiendo del rol 
+				del jugador por lo que resulta de interés estudiarlo.<br> <br/>
+
+				Hemos definido la función <b>DosDados</b> para controlar el experimento:
+
+				<!--begin.rcode
+				DosDados = function(Mostrar=F, Maximo=1000, Total=1)
+				{
+
+				###############################################################
+				# 
+				# Experimentamos con el numero de lanzamientos necesarios
+				# para obtener un dos con dos dados
+				#
+				# Pone el contador de aciertos a 0
+				# Hacemos 2 lanzamientos y sumamos el resultado
+				# Incrementamos el numero de lanzamientos
+				# Si no es un 2 vuelve al principio del bucle
+				# Si es un 2 se incrementa el contador de aciertos
+				# Si conseguimos el total de aciertos requeridos salimos del bucle
+				#
+				###############################################################
+
+				Lanzamientos = 0
+				Resultado = 1:Maximo
+				Aciertos = 0 
+				repeat{
+				  Lanzamientos = Lanzamientos + 1
+				  if (Maximo <= Lanzamientos ){
+					if(Mostrar){
+					   cat("No he podido obtener ", Total , "acierto(s) en ", Lanzamientos, "lanzamientos. \n")
+					}
+				  return(list(E = NA, R = Resultado, Conseguido=F))
+				  }
+				  TiraPrimerDado = sample(6, 1, T)
+				  TiraSegundoDado = sample(6, 1, T)
+
+				  Resultado[Lanzamientos] = TiraPrimerDado + TiraSegundoDado
+				  if(Resultado[Lanzamientos] != 2){next}
+
+				  Aciertos = Aciertos + 1
+
+				  if(Aciertos == Total){break}
+				}
+				length(Resultado) = Lanzamientos
+
+				if(Mostrar){
+				  cat("He necesitado", Lanzamientos, "lanzamientos para obtener", Total, "acierto(s) en el experimento\n")
+				}
+
+				return(list(E = Lanzamientos, R = Resultado, Conseguido=T))
+				}
+				end.rcode-->
+
+				Realizaremos algunas pruebas con la función definida para realizar 1 éxito en nuestro experimento para 20 lanzamientos.<br> <br/>
+
+				<!--begin.rcode
+				DosDados(T,20,1)
+				end.rcode-->
+
+
+				También probaremos para realizar 2 éxitos en nuestro experimento para 50 lanzamientos.<br> <br/>
+
+				<!--begin.rcode
+				DosDados(T,50,2)
+				end.rcode-->
+
+				Al igual que hicimos con las cartas, podemos definir una función que realice varios experimentos y muestre su distribución. 
+				La llamaremos <b>DistriDados</b>.<br> <br/>
+
+				<!--begin.rcode
+				DistriDados = function(n=10, Maximo=100, Total=1)
+				{
+				Lanzo = vector(length=n)
+				  for(i in 1:n)
+					Lanzo[i] = DosDados(F,Maximo,Total)$E
+				  Lanzo
+				}
+				end.rcode-->
+
+				Podemos observar un resumen de los datos y observar el histograma de la distribución con las órdenes <b>summary()</b> y <b>hist()</b>.<br> <br/>
+
+				<!--begin.rcode
+				Distribucion = DistriDados()
+				summary(Distribucion)
+				end.rcode-->
+
+				A continuación mostraremos el histograma generado para 10 experimentos realizados con un máximo de 100 
+				lanzamientos para obtener un total de 1 acierto en cada uno de ellos.<br> <br/>
+
+				<!--begin.rcode
+				hist(Distribucion)
+				end.rcode-->
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="monedas">
+		<div class="container">
+			<h1>Ejemplo: Moneda</h1>
+			<p>
+				Esta vez el experimento consiste en lanzar una moneda y ver el número de caras (valor 1) seguidos que obtenemos en un número máximo de lanzamientos.<br> <br/>
+
+				Para el experimento valoraremos el número de 1 que obtenemos seguidos. Si durante los lanzamientos obtenemos una cruz (valor 0) 
+				reseteamos el experimento manteniendo el recuento de de lanzamientos que llevemos hasta el momento.<br> <br/>
+
+				Hemos definido la función <b>LanzaMoneda</b> para controlar el experimento:
+
+				<!--begin.rcode
+				LanzaMoneda = function(Mostrar=F, Maximo=10, Total=1)
+				{
+
+				###############################################################
+				# 
+				# Experimentamos con el numero de caras seguidas
+				# obtenidas en el lanzamiento de una moneda
+				#
+				# Pone el contador de aciertos a 0
+				# Hacemos 1 lanzamiento 0 cruz 1 cara
+				# Incrementamos el numero de lanzamientos
+				# Si sale 1 cara se incrementa el contador de aciertos
+				# Si sale 1 cruz los aciertos pasan a 0
+				# Si conseguimos el total de aciertos seguidos salimos del bucle
+				#
+				###############################################################
+
+				Lanzamientos = 0
+				Resultado = 1:Maximo
+				Aciertos = 0 
+				repeat{
+				  Lanzamientos = Lanzamientos + 1
+				  if (Maximo <= Lanzamientos){
+					if(Mostrar){
+					  cat("No he podido obtener", Total , "caras en", Lanzamientos, "lanzamientos. \n")
+					}
+				  return(list(E = NA, R = Resultado, Conseguido=F))
+				}
+				LanzaMoneda = sample(c(0,1), 1, T)
+
+				Resultado[Lanzamientos] = LanzaMoneda
+				if(Resultado[Lanzamientos] == 1){
+				  Aciertos = Aciertos + 1
+				}
+
+				else{
+				  Aciertos = 0
+				}
+
+				if(Aciertos == Total){break}
+				}
+				length(Resultado) = Lanzamientos
+
+				if(Mostrar){
+				  cat("He necesitado", Lanzamientos, "lanzamientos para obtener", Total, "caras seguidas\n")
+				}
+
+				return(list(E = Lanzamientos, R = Resultado, Conseguido=T))
+				}
+				end.rcode-->
+
+				Realizaremos algunas pruebas con la función definida para conseguir 2 caras seguidas para 10 lanzamientos.<br> <br/>
+
+				<!--begin.rcode
+				LanzaMoneda(T,10,2)
+				end.rcode-->
+
+				También probaremos para conseguir 3 caras seguidas en nuestro experimento para 30 lanzamientos.<br> <br/>
+
+				<!--begin.rcode
+				LanzaMoneda(T,30,3)
+				end.rcode-->
+
+				Al igual que hicimos con las cartas y los dados, podemos definir una función que realice varios 
+				experimentos y muestre su distribución. La llamaremos <b>DistriMoneda</b>.<br> <br/>
+
+				<!--begin.rcode
+				DistriMoneda = function(n=10, Maximo=20, Total=2)
+				{
+				Lanzo = vector(length=n)
+				for(i in 1:n)
+				  Lanzo[i] = LanzaMoneda(F,Maximo,Total)$E
+				Lanzo
+				}
+				end.rcode-->
+
+				Podemos observar un resumen de los datos y observar el histograma de la distribución con las órdenes <b>summary()</b> y <b>hist()</b>.<br> <br/>
+
+				<!--begin.rcode
+				Distribucion = DistriMoneda()
+				summary(Distribucion)
+				end.rcode-->
+
+				A continuación mostraremos el histograma generado para 10 experimentos realizados con un máximo de 20 
+				lanzamientos para obtener un total de 2 aciertos en cada uno de ellos.<br> <br/>
+
+				<!--begin.rcode
+				hist(Distribucion)
+				end.rcode-->
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="epi">
+		<div class="container">
+			<h1>Epígrafes 3.5.6 al 3.5.8</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="6.1">Función Suma de potencias</a></h3></font>
+				</body>
+
+				En primer lugar aparece una función que calcula la suma de los cuadrados y cubos de las componentes de un vector, y los devuelve en un vector.<br> <br/>
+
+				<!--begin.rcode
+				sumpot=function(x){
+				  s2 = sum(x^2)
+				  s3 = sum(x^3)
+				  return(list(cuadrados=s2,cubos=s3))
+				}
+				end.rcode-->
+
+				A continuación realizaremos algunos ejemplos sobre la función <b>sumpot</b> definida en el guión.<br> <br/>
+
+				<!--begin.rcode
+				sumpot(1:5)
+				end.rcode-->
+
+				A continuación se modifica la definición, añadiendo un segundo argumento que, predeterminadamente, da el mismo resultado, 
+				pero que permite obtener las sumas de otras potencias. A esta función la llamaremos <b>sumpot2</b>.<br> <br/>
+
+				<!--begin.rcode
+				sumpot2=function(x,potencias=2:3)
+				{
+				  L=length(potencias)
+				  resultado=vector("list",length=L)
+				  for (i in 1:L) resultado[[i]]=sum(x^potencias[i])
+				  return(resultado)
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				sumpot2(1:5,c(2,3))
+				end.rcode-->
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.2">Función en una cuadrícula</a></h3></font>
+				</body>
+
+				La siguiente función genera una cuadrícula sobre un conjunto de ordenadas (x) y abscisas (y) y, 
+				para cada punto de esa cuadrícula, calcula la distancia hasta el origen de coordenadas.<br> <br/>
+
+				<!--begin.rcode
+				distancia.origen = function(x,y)
+				{
+				  puntos=matrix(-1,length(x),length(y))
+				  for (i in 1:length(x))
+				  {
+					for (j in 1:length(y))
+					{
+					  puntos[i,j]=sqrt(x[i]^2+y[j]^2)
+					}
+				  }
+				  return(puntos)
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				distancia.origen(1:4,-3:3)
+				end.rcode-->
+
+				También podemos escribir una definición alternativa utilizando la forma general del producto 
+				exterior. Funciona de igual manera ofreciendo los mismos resultados.<br> <br/>
+
+				<!--begin.rcode
+				distancia.ORIGEN = function(x,y){
+				  outer(x,y,function(x,y) sqrt(x^2+y^2))
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				distancia.ORIGEN(1:4,-3:3)
+				end.rcode-->
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.3">Procesos no lineales</a></h3></font>
+				</body>
+
+				Las tres funciones siguientes corresponden a procesos no lineales descritos en <b>Dong</b> que, de forma sencilla, definen estructuras complejas.<br> <br/>
+
+				<!--begin.rcode
+				dong1=function(numero = 100)
+				{
+				  x = vector(mode = "numeric", length = numero)
+				  y = vector(mode = "numeric", length = numero)
+				  x[1] = 1
+				  y[1] = 1
+				  for(i in 2:numero)
+				  {
+					if(sample(2,1) == 2)
+					  {m = 1}
+					else
+					  {m = -1}
+					x[i] = 0.5 * x[i - 1] + 0.5 * y[i - 1] + m
+					y[i] = -0.5 * x[i - 1] + 0.5 * y[i - 1] + m
+				  }
+				  return(list(x = x[2:numero], y = y[2:numero]))
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				dong2=function(numero = 100)
+				{
+				  x = vector(mode = "numeric", length = numero)
+				  y = vector(mode = "numeric", length = numero)
+				  x[1] = 1
+				  y[1] = 1
+				  for(i in 2:numero)
+				  {
+					a = sample(3,1)
+					if(a == 1)
+					{
+					  m = 0
+					  n = 0
+					}
+					else
+					{
+					  if(a == 2)
+					  {
+						m = 0.5
+						n = 0
+					  }
+					  else
+					  {
+						m = 0.25
+						n = 0.5
+					  } }
+					x[i] = 0.5 * x[i - 1] + m
+					y[i] = 0.5 * y[i - 1] + n
+				  }
+				  return(list(x = x[2:numero], y = y[2:numero]))
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				dong3=function(numero = 100)
+				{
+				  x = vector(mode = "numeric", length = numero)
+				  y = vector(mode = "numeric", length = numero)
+				  x[1] = 1
+				  y[1] = 1
+				  for(i in 2:numero)
+				  {
+					a = sample(100,1)
+					if(a == 1)
+					{
+					  x[i] = 0
+					  y[i] = 0.25 * y[i - 1]
+					}
+					else
+					{
+					  if(a <= 86)
+					  {
+						x[i] = 0.85 * x[i - 1] + 0.04 * y[i - 1]
+						y[i] = -0.04 * x[i - 1] + 0.85 * y[i - 1] + 1.6
+					  }
+					  else
+					  {
+						if(a <= 93)
+						{
+						  x[i] = 0.2 * x[i - 1] - 0.26 * y[i - 1]
+						  y[i] = 0.26 * x[i - 1] + 0.22 * y[i - 1]
+						}
+						else
+						{
+						  x[i] = -0.15 * x[i - 1] + 0.28 * y[i - 1]
+						  y[i] = 0.26 * x[i - 1] + 0.24 * y[i - 1] + 1
+						} } }
+				  }
+				  return(list(x = x[2:numero], y = y[2:numero]))
+				}
+				end.rcode-->
+
+				Realizaremos una prueba para cada función <b>dong1, dong2, dong3</b>.<br> <br/>
+
+				<!--begin.rcode
+				dong1(10)
+				dong2(10)
+				dong3(10)
+				end.rcode-->
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.4">Lista de búsqueda y entornos</a></h3></font>
+				</body>
+
+				Podemos encontrar todos los lugares donde se encuentran objetos con las funciones <b>search</b> y <b>searchpaths</b>.<br> <br/>
+
+				<!--begin.rcode
+				search()
+				searchpaths()
+				end.rcode-->
+
+				Estas funciones devuelven un vector con la lista de libros y objetos de R que están en uso actualmente.<br> <br/>
+
+				Con las funciones <b>ls</b> y <b>get</b> podemos buscar y recuperar objetos de las sesiones anteriores.<br> <br/>
+
+				<!--begin.rcode
+				ls(1,pa="Dados")
+				get("DosDados",) -> MM
+				MM()
+				end.rcode-->
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ext">
+		<div class="container">
+			<h1>Uso de archivos externos</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="7.1">Ejercicio: Lectura de hojas de datos</a></h3></font>
+				</body>
+
+				Existen diversas funciones que permiten leer datos de un archivo y almacenarlos directamente en una 
+				hoja de datos. Los datos del archivo deben estar en forma de tabla y se creará una hoja de datos con el mismo número 
+				de variables que campos o columnas haya en el archivo y con el mismo número de filas que líneas haya en el archivo.<br> <br/> 
+
+				Nos centraremos en las funciones <b>read</b> y utilizaremos los datos aportados en los siguientes enlaces proporcionados:<br> <br/>
+
+				<a href="http://www.ugr.es/local/andresgc/Datos.txt">
+						http://www.ugr.es/local/andresgc/Datos.txt
+					</a>
+				, 
+				<a href="http://www.ugr.es/local/andresgc/Datos2.txt">
+						http://www.ugr.es/local/andresgc/Datos2.txt
+					</a><br> <br/>
+				 
+				 En primer lugar, leemos los datos con la función <b>read.csv</b> y <b>read.table</b> almacenamos su valor en una matriz.<br> <br/>
+				 
+				<!--begin.rcode
+				datos1 = read.csv("http://www.ugr.es/local/andresgc/Datos.txt",header=T, sep=",")
+
+				datos2 = read.table("http://www.ugr.es/local/andresgc/Datos2.txt",header=T)
+				end.rcode-->
+
+				Podemos ver un resumen de los datos con la función <b>summary</b> utilizada anteriormente.<br> <br/>
+
+				<!--begin.rcode
+				summary(datos1)
+				summary(datos2)
+				end.rcode-->
+
+				También podemos mostrar el histograma por variable para cada conjunto de datos utilizando la función <b>hist</b> de la siguiente forma:<br> <br/>
+
+				<!--begin.rcode
+				hist(datos1$Altura, main="Altura datos 1")
+				hist(datos2$Peso, main="Peso datos 2")
+				end.rcode-->
+
+				También utilizaremos algunas funciones derivadas de <b>plot</b> como <b>barplot</b> y <b>boxplot</b> 
+				que generan gráficos diferentes para cada conjunto de datos.<br> <br/>
+
+				<!--begin.rcode
+				barplot(datos1$Altura)
+				plot(datos1)
+				boxplot(datos1)
+				barplot(datos2$Peso)
+				plot(datos2)
+				boxplot(datos2)
+				end.rcode-->
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="7.2">Gestión de objetos</a></h3></font>
+				</body>
+
+				Existen diferentes funciones que permiten almacenar y recuperar objetos, unas son binarias (rápidas y exactas) 
+				y otras textuales (legibles por el usuario y compatibles entre plataformas y versiones del lenguaje).<br> <br/>
+
+				En el siguiente ejemplo creamos un vector de números y los guardamos en una variable, seguidamente escribimos 
+				su contenido en un archivo de texto y borramos la variable que almacena el vector. 
+				Finalmente lo recuperamos leyendo desde el archivo txt.<br> <br/>
+
+				<!--begin.rcode
+				x <- (1:10)^2
+				x
+				write(x,file="x.txt")
+				rm(x)
+				x
+				x <- scan("x.txt")
+				x
+				end.rcode-->
+
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="7.3">Ejercicio: Función library</a></h3></font>
+				</body>
+
+				La función <b>library</b> gestiona los libros de la biblioteca, dando información sobre los existentes y cargándolos en memoria o
+				descargándolos de la misma.<br> <br/>
+
+				Probaremos a cargar y descargar libros tal y como se nos indica en el guión:<br> <br/>
+
+				<!--begin.rcode
+				search()
+				# library()
+				end.rcode-->
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/11.jpg" alt="Captura" >
+						</td>
+					</tr>
+				</table>
+
+				<!--begin.rcode
+				library("parallel")
+				search()
+				# library(help="parallel")
+				end.rcode-->
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/12.jpg" alt="Captura2" >
+						</td>
+					</tr>
+				</table>
+
+				<!--begin.rcode
+				# help("mclapply")
+				end.rcode-->
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/13.jpg" alt="Captura3" >
+						</td>
+					</tr>
+				</table>
+
+				<!--begin.rcode
+				detach(pos=2)
+				search()
+				end.rcode-->
+
+				Finalmente para descargar el libro hacemos uso de la función <b>detach()</b>.<br> <br/>
+
+				También podemos instalar paquetes que descarguemos de la web e instalarlos de la misma forma que los paquetes vistos con la orden <b>library()</b>.<br> <br/>
+
+				<!--begin.rcode
+				# install.packages("package's name")
+				# library("package's name")
+				end.rcode-->
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ref">
+		<div class="container">
+			<h1>Referencias</h1>
+			<p>
+				<div class="caja">
+					<div class="color">
+
+						<p>	Referencias utilizadas en el desarrollo de esta entrega: 
+						</p>
+					</div>
+
+					<p>
+					Web para la obtención de gráficos para los datos: 
+					<a href="https://www.r-bloggers.com/box-plot-with-r-tutorial/">
+						https://www.r-bloggers.com/box-plot-with-r-tutorial/
+					</a>
+					</p>
+
+					<p>
+
+					Documento <i>'Curso R'</i> de la asignatura. 
+					
+					</p>	 
+				</div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional</h1>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="units-row">
+			    <div class="unit-50">
+			    	<p>Creado por Daniel Bolaños Martínez</p>
+			    </div>
+			    <div class="unit-50">
+					<ul class="social list-flat right">
+						<li><a href="mailto:danibolanos@correo.ugr.es"><i class="fa fa-send"></i></a></li>
+					</ul>
+			    </div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Javascript -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/typed.min.js"></script>
+    <script src="assets/js/kube.min.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script>
+		function newTyped(){}$(function(){$("#typed").typed({
+		// Change to edit type effect
+		strings: ["estadística", "computación"],
+
+		typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+    </script>
+</body>
+</html>

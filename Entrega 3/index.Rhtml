@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadística Computacional. Entrega 3.</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Draco is free PSD &amp; HTML template by @flamekaizar">
+    <meta name="author" content="Afnizar Nur Ghifari">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/kube.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/custom.min.css" />
+	<link rel="stylesheet" href="assets/arriba/fonts.css" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" />
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC:700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="assets/arriba/arriba.js"></script>
+	<style>
+		.intro h1:before {
+			/* Edit this with your name or anything else */
+			content: 'UGR';
+		}
+	</style>
+	<body bgcolor="#F7F8E0">
+</head>
+
+<span class="ir-arriba icon-arrow-up2"></span>
+
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+				    <span class="logo">DANI</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav">
+				    <ul>
+				        <li class="active"><a href="#about">Introducción</a></li>
+				        <li><a href="#graf">Dispositivos Gráficos</a></li>
+				        <li><a href="#plot">Plot, Text y Symbols</a></li>
+				        <li><a href="#hist">Hist, Polygon, Curve, Lines y Points</a></li>
+						<li><a href="#barplot">Barplot, Boxplot, Pairs y Gráficos múltiples</a></li>
+					    <li><a href="#diagram">Diagramas y Representaciones Tridimensionales</a></li>
+						<li><a href="#ej">Ejercicio práctico</a></li>
+						<li><a href="#ref">Referencias</a></li>
+				    </ul>
+				</nav>
+			</header>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional : entrega 3</h1>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro section" id="about">
+		<div class="container">
+			<p>Alumno: Daniel Bolaños Martínez</p>
+			<div class="units-row units-split wrap">
+				<div class="unit-20">
+					<img src="assets/img/ava.jpg" alt="Avatar">
+				</div>
+				<div class="unit-80">
+					<h1>Introducción<br><span id="typed"></span></h1>					
+				</div>
+				<p>
+				En el siguiente documento se mostrará el trabajo realizado para la tercera tarea de la asignatura Estadística Computacional durante el periodo no presencial.<br> <br/>
+				Se adjuntará el trabajo realizado sobre los ejemplos propuestos relativos al Capítulo 5: Gráficos.	
+				</p>				
+			</div>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="graf">
+		<div class="container">
+			<h1>Dispositivos Gráficos</h1>
+            <p>
+			  
+				A continuación se presentarán algunas nociones básicas para entender el visualizado de gráficos en R.<br> <br/> 
+			  
+				Usando la orden <b>?Devices</b> podemos comprobar los dispositivos gráficos disponibles en nuestro sistema, 
+				teniendo en cuenta que estamos en la version de R para <b>Windows</b>.
+
+				<!--begin.rcode
+				#?Devices
+                end.rcode-->
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/devices.png" alt="Devices" >
+						</td>
+					</tr>
+				</table>
+               
+                Entre las funciones disponibles podemos destacar x11, win.print, pictex, png, jpeg, bmp, win.metafile y postscript.<br> <br/> 
+
+                Probaremos algunas como <b>x11</b>, <b>bmp</b> o <b>win</b>. Estas funciones generan un archivo en el ordenador personal que contiene
+				el resultado de la orden que se está ejecutando.<br> <br/> 
+				
+				La función <b>x11()</b> abre una nueva ventana gráfica a la que irán dirigidos los resultados gráficos desde ese momento.<br> <br/> 
+				La función <b>bmp()</b> genera un gráfico en el formato que indica su nombre.<br> <br/> 
+                  
+				<!--begin.rcode
+				#x11()
+				#bmp(filename="Rplot.bmp", width=480, height=480, pointsize=12)
+                end.rcode-->
+				
+				<!--begin.rcode
+				dong1 = function(numero = 100)
+				{
+				  x = vector(mode = "numeric", length = numero)
+				  y = vector(mode = "numeric", length = numero)
+				  x[1] = 1
+				  y[1] = 1
+				  for(i in 2:numero)
+				  {
+					if(sample(2,1) == 2)
+					  {m = 1}
+					else
+					  {m = -1}
+					x[i] = 0.5 * x[i - 1] + 0.5 * y[i - 1] + m
+					y[i] = -0.5 * x[i - 1] + 0.5 * y[i - 1] + m
+				  }
+				  return(list(x = x[2:numero], y = y[2:numero]))
+				}
+				end.rcode-->
+
+				<!--begin.rcode
+				dong2 = function(numero = 100)
+				{
+				  x = vector(mode = "numeric", length = numero)
+				  y = vector(mode = "numeric", length = numero)
+				  x[1] = 1
+				  y[1] = 1
+				  for(i in 2:numero)
+				  {
+					a = sample(3,1)
+					if(a == 1)
+					{
+					  m = 0
+					  n = 0
+					}
+					else
+					{
+					  if(a == 2)
+					  {
+						m = 0.5
+						n = 0
+					  }
+					  else
+					  {
+						m = 0.25
+						n = 0.5
+					  } }
+					x[i] = 0.5 * x[i - 1] + m
+					y[i] = 0.5 * y[i - 1] + n
+				  }
+				  return(list(x = x[2:numero], y = y[2:numero]))
+				}
+				end.rcode-->
+				
+				<!--begin.rcode
+				dong3 = function(numero = 100)
+				{
+				  x = vector(mode = "numeric", length = numero)
+				  y = vector(mode = "numeric", length = numero)
+				  x[1] = 1
+				  y[1] = 1
+				  for(i in 2:numero)
+				  {
+					a = sample(100,1)
+					if(a == 1)
+					{
+					  x[i] = 0
+					  y[i] = 0.25 * y[i - 1]
+					}
+					else
+					{
+					  if(a <= 86)
+					  {
+						x[i] = 0.85 * x[i - 1] + 0.04 * y[i - 1]
+						y[i] = -0.04 * x[i - 1] + 0.85 * y[i - 1] + 1.6
+					  }
+					  else
+					  {
+						if(a <= 93)
+						{
+						  x[i] = 0.2 * x[i - 1] - 0.26 * y[i - 1]
+						  y[i] = 0.26 * x[i - 1] + 0.22 * y[i - 1]
+						}
+						else
+						{
+						  x[i] = -0.15 * x[i - 1] + 0.28 * y[i - 1]
+						  y[i] = 0.26 * x[i - 1] + 0.24 * y[i - 1] + 1
+						} } }
+				  }
+				  return(list(x = x[2:numero], y = y[2:numero]))
+				}
+				end.rcode-->
+				
+				<br> <br/>
+				
+				Utilizaremos las funciones <b>dong</b> definidas en la tarea anterior para pintar su dibujo con la función <b>plot()</b>.<br> <br/> 
+				
+				<!--begin.rcode
+				dong1.datos<-dong1(10000)
+				dong2.datos<-dong2(10000)
+				dong3.datos<-dong3(10000)
+				#win.graph()
+				plot(dong1.datos,col="yellow")
+				#win.graph()
+				plot(dong2.datos,col="red")
+				#win.graph()
+				plot(dong3.datos,col="blue")
+                end.rcode-->
+				
+				La función <b>win.print()</b> genera gráficos directamente sobre el administrador de impresión del sistema y la función 
+				<b>win.metafile()</b> imprime el gráfico en un archivo. Esta función dibuja sobre el ordenador personal, es por ello
+				que la comentamos.
+			</p>
+		</div>
+	</div>
+
+	<!-- Award & Achievements -->
+	<div class="work section second" id="plot">
+		<div class="container">
+			<h1>plot, text y symbols</h1>
+			<p>
+				Se harán pruebas con las funciones <i>plot</i>, <i>text</i> y <i>symbols</i> para mostrar gráficos en <b>knitr</b>.
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.1">Función plot</a></h3></font>
+				</body>
+
+				<b>plot</b> es una función genérica que crea un gráfico en el dispositivo gráfico actual.<br> <br/>
+				
+				Probaremos a dibujar una función cuadrática.<br> <br/>
+				
+				<!--begin.rcode
+				plot(1:100,(1:100)^2, type="l")
+				end.rcode-->
+				
+                Dibujaremos el coseno de x entre -2pi y 2pi, poniéndo nombre a los ejes en el gráfico.<br> <br/>
+				
+                <!--begin.rcode
+                x<-seq(-2*pi, 2*pi, 0.1)
+                plot(x, cos(x), main="Función Coseno", ylab="cos(x)")  
+                end.rcode-->
+                
+                También podemos dibujar dos funciones en el mismo gráfico con diferentes colores.
+				La función <b>legend()</b> permite añadir una leyenda a los gráficos.<br> <br/>
+				
+                <!--begin.rcode
+                plot(x, x^3, main="Gráfico conjunto", ylab="", type="l", col="black")
+                lines(x, x^2, col="red")
+                legend("topleft", c("x^3", "x^2"), fill=c("black","red"))
+                end.rcode-->
+
+                <hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.2">Función text</a></h3></font>
+				</body>
+				
+				Esta función añade texto a un gráfico existente.<br> <br/>
+				
+                <!--begin.rcode
+                curve(sin(x),-pi,pi,col="blue")
+                text(-3,0.5,"sen(x)",col="blue",cex=4,adj=0)
+                end.rcode-->
+                  
+				Podemos cambiar elementos del gráfico tales como: color, nombre...<br> <br/>
+				
+                <!--begin.rcode
+                curve(cos(x), -pi, pi, col="red")
+                text(-2, 0.8,"Función coseno", col="red", cex=3, adj=0)
+                end.rcode-->
+
+				<hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.3">Función symbols</a></h3></font>
+				</body>
+				
+				Esta función permite dibujar círculos, cuadrados, rectángulos, estrellas, termómetros y cajas 
+				en una posición determinada de un gráfico, indicando además el tamaño que deben tener. Mostramos un ejemplo:<br> <br/>
+                
+				<!--begin.rcode
+				n = 10
+				x = 1:n
+				palette(rainbow(n))
+				z = runif(10)
+				symbols(x,z,circles=z,xlim=c(-1,12),ylim=c(0,1.5),bg=1:n)
+				end.rcode-->
+
+                Probaremos el mismo gráfico utilizando termómetros.<br> <br/>
+				
+				<!--begin.rcode
+				x = 1:10
+				y = sort(10*runif(10))
+				z = runif(10)
+				symbols(x, y, thermometers = cbind(.5, 1, z), inches = .5, fg = 1:10)
+				end.rcode-->
+			</p>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="hist">
+		<div class="container">
+			<h1>hist, polygon, curve, lines y points</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="4.1">Función hist</a></h3></font>
+				</body>
+                Esta función genera y devuelve un histograma de los datos suministrados y además lo dibuja 
+				si se indica el parámetro <b>plot=TRUE</b>. Probaremos a dibujar el histograma de una distribución normal tipificada.<br> <br/>
+				
+                <!--begin.rcode
+                hist(rnorm(100),col="red",freq=F,xlim=c(-5,5), ylim=c(0,dnorm(0)*1.2),xlab="",ylab="Densidad",main="Muestra y Población")
+                end.rcode-->
+				
+				<hr>
+				
+				<body>
+					<font color="#0B0B61"><h3><a name="4.2">Función polygon</a></h3></font>
+				</body>
+				
+				Esta función dibuja polígonos definidos por sus vértices, sobre un gráfico ya existente.<br> <br/>
+                  
+                <!--begin.rcode
+                x = c(1,9)
+                plot(x, x, type="n")
+                polygon(c(2,4,4,2,NA,6,8,8,6), c(2,2,4,4,NA,6,6,8,8),
+                density = c(10, 20), angle=c(-45, 45),col=c("red","blue"))
+                end.rcode-->
+				
+				<hr>
+				
+				<body>
+					<font color="#0B0B61"><h3><a name="4.3">Función curve</a></h3></font>
+				</body>
+				
+				Esta función dibuja la curva correspondiente a una función dada en un intervalo concreto. <br> <br/>
+				El parámetro <b>add=True</b> permite dibujar las curvas en la misma gráfica.<br> <br/>
+				Dibujaremos las curvas del coseno, seno y la gráfica de una distribución normal (del apartado 5.7).<br> <br/>
+
+                <!--begin.rcode
+                curve(sin(x), -pi, pi, col="blue")
+                curve(cos(x), -pi, pi, add=TRUE, col="red")
+                curve(dnorm(x), -5, 5, add=TRUE, col="black")
+                end.rcode-->
+
+				<hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="4.4">Funciones lines y points</a></h3></font>
+				</body>
+				
+				Con estas funciones genéricas, puede añadir puntos o líneas al gráfico actual.
+                Para el primer ejemplo, generamos 30 valores pseudoaleatorios de una normal tipificada, 
+				los representamos y añadimos líneas, y líneas y puntos.<br> <br/>
+				
+                <!--begin.rcode
+                x=rnorm(30)
+                opar=par(mfrow=c(1,3))
+                plot(x,xlab="Tiempo",ylab="Ruido")
+                plot(x,xlab="Tiempo",ylab="Ruido")
+                lines(x,col="blue")
+                plot(x,xlab="Tiempo",ylab="Ruido")
+                lines(x,col="blue")
+                points(x,col="red",pch=4)
+                par(opar)
+                end.rcode-->
+				
+				<br> <br/>
+
+                A continuación, haremos un segundo ejemplo con <b>h.datos2</b>. En primer lugar, eleccionamos en primer lugar las mujeres. 
+				Representamos los valores de altura frente a peso, marcamos de modo distinto los
+                hombres y mujeres y unimos con tramos rectos los elementos de cada grupo.<br> <br/>
+
+                <!--begin.rcode
+                h.datos2 <-read.table("https://www.ugr.es/~andresgc/Datos2.txt",header=T)
+                attach(h.datos2)
+                Mujer<-Sexo=="M"
+                plot(Altura,Peso)
+                points(Altura[Mujer], Peso[Mujer],
+                type="p",pch=3,col="yellow")
+                points(Altura[!Mujer],Peso[!Mujer],
+                type="p",pch=4,col="blue")
+                points(c(Altura[Mujer],NA,Altura[!Mujer]),
+                c(Peso[Mujer], NA,Peso[!Mujer]),type="b",col="red")
+                end.rcode-->
+
+                Como resultados obtenemos una gráfica lineal, que implica que a mayor altura mayor será el peso de en este caso, la mujer.
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="barplot">
+		<div class="container">
+			<h1>barplot, boxplot, pairs y gráficos múltiples</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="5.1">Función barplot</a></h3></font>
+				</body>
+				
+				Esta función genera gráficos de barras en muy diversas formas.<br> <br/>
+				
+				para este ejemplo, se generan 100 números pseudoaleatorios de una distribución de Poisson de 
+				parámetro λ = 5, se realiza un conteo de frecuencias y se representa con barras de diferentes colores.<br> <br/>
+                
+                <!--begin.rcode
+                tN <- table(Ni <- rpois(100, lambda=5))
+                r <- barplot(tN, col=rainbow(20))
+				end.rcode-->
+				
+                Aquí tenemos otro ejemplo (extraído de <b>example(barplot)</b>) de este gráfico que estudia los supervivientes al hundimiento del <b>Titanic</b> por 
+				clase y que nos sirve para conocer varios parámetros de la función.<br> <br/>
+				
+                <!--begin.rcode
+                d.Titanic <- as.data.frame(Titanic)
+                barplot(Freq ~ Class + Survived, data = d.Titanic, subset = Age == "Adult" & Sex == "Male", main = "barplot(Freq ~ Class + Survived, *)", ylab = "# {passengers}", legend = TRUE)
+                end.rcode-->
+				
+				<hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="5.2">Función boxplot</a></h3></font>
+				</body>
+				
+				Esta función realiza gráficos de caja con bigotes (<i>box-and-whisker</i>).<br> <br/>
+				
+                <!--begin.rcode
+                boxplot(Peso[Sexo=="M"],Peso[Sexo=="H"], notch=F,names=c("Mujer","Hombre"),ylab="Peso",col=c("blue","red"))
+                end.rcode--> 
+
+                Podemos estudiar el rango en el que se mueven las variables a partir de un dataset. 
+				En nuestro ejemplo, las mujeres tienen un peso entre 55 y 65kg, 
+				mientras que el peso de los hombres oscila entre 70 y 80 kg.<br> <br/>
+				
+				Aquí tenemos otro ejemplo (extraído de <b>example(boxplot)</b>) sobre la efectividad de diferentes
+				insecticidas para controlar plagas en agricultura.<br> <br/>
+				
+                <!--begin.rcode
+                boxplot(count ~ spray, data = InsectSprays, col = "lightgray")
+                end.rcode--> 
+				
+				<hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="5.3">Función pairs</a></h3></font>
+				</body>
+				
+                Esta función, genérica, crea una figura que contiene todos los diagramas de dispersión de cada variable 
+				frente a las restantes. La función está definida para las clases matrix, data.frame y formula.<br> <br/>
+				
+				Utilizaremos el ejemplo con los datos <b>h.datos2</b> que hemos leído antes. <br> <br/>
+				
+                <!--begin.rcode
+                pairs(h.datos2)
+                end.rcode-->
+
+                Incluiremos en la diagonal del gráfico los histogramas referentes a cada variable.<br> <br/>
+
+                <!--begin.rcode
+                panel.hist <- function(x, ...)
+                    {
+                    usr <- par("usr"); on.exit(par(usr))
+                    par(usr = c(usr[1:2], 0, 1.5) )
+                    h <- hist(x, plot = FALSE)
+                    breaks <- h$breaks; nB <- length(breaks)
+                    y <- h$counts; y <- y/max(y)
+                    rect(breaks[-nB], 0, breaks[-1], y, col="cyan", ...)
+                    }
+                      
+                pairs(h.datos2[1:4], panel=panel.smooth, diag.panel=panel.hist, cex.labels=1.5, font.labels=2)
+                end.rcode-->
+				
+                Finalmente dibujaremos las correlaciones absolutas en los paneles superiores de tamaño proporcional a los valores.<br> <br/>
+				
+                <!--begin.rcode
+                panel.cor <- function(x, y, digits=2, prefix="", cex.cor)
+                    {
+                    usr <- par("usr"); on.exit(par(usr))
+                    par(usr = c(0, 1, 0, 1))
+                    r <- abs(cor(x, y))
+                    txt <- format(c(r, 0.123456789), digits=digits)[1]
+                    txt <- paste(prefix, txt, sep="")
+                    if(missing(cex.cor)) cex <- 0.8/strwidth(txt)
+                    text(0.5, 0.5, txt, cex = cex * r)
+                    }
+                pairs(h.datos2, lower.panel=panel.smooth, upper.panel=panel.cor)
+                end.rcode-->
+
+                La correlación nos indica como de relacionadas están las variables del dataset entre sí.<br> <br/>
+                Para el conjunto de datos utilizado, obtenemos mayor relación entre las variables <b>Peso</b> y <b>Altura</b>, lo que nos indica que una 
+				variable depende en gran parte de la otra. Si la correlación es negativa, indica que la relación se establece de forma inversa.
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="5.4">Gráficos múltiples</a></h3></font>
+				</body>
+				
+                Entre los argumentos de la función <b>par()</b>, uno de ellos permite representar gráficos múltiples, el argumento 
+				<b>mfcol=c(m,n)</b>, consigue dividir el dispositivo gráfico en <b>m x n</b> partes iguales para 
+				poder presentar <b>m x n</b> gráficos simultáneamente.<br> <br/>
+                
+				El argumento <b>mfrow</b> rellena por filas mientras que <b>mfcol</b> rellena por columnas la división.<br> <br/>
+				
+                <!--begin.rcode
+                par(mfrow=c(2,3))
+                x<-(1:10)
+                y<-(4:13)^3
+                plot(x)
+                plot(y)
+                plot(x,y)
+                plot(y,y^2)
+                plot(x,y^2)
+                plot(y,x^2)
+                end.rcode-->  
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="diagram">
+		<div class="container">
+			<h1>Diagramas y Representaciones Tridimensionales</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="6.1">Diagrama de sectores</a></h3></font>
+				</body>
+				
+				La función <b>pie</b> nos permite crear un diagrama de sectores.<br> <br/>
+				
+				Se utiliza en aquellos casos donde interesa no solamente mostrar el número de veces que se 
+				dan una característica de manera tabular sino más bien de manera gráfica, de tal forma que se 
+				pueda visualizar mejor la proporción en que aparece esa característica respecto del total.<br> <br/>
+              
+                <!--begin.rcode
+                #graphics.off()
+                #x11()
+                opar<- par(mai=c(0,0,0.2,0))
+                Provincia<-c("GR","CO","GR","GR","HU","GR","GR","GR","AL","GR","GR","GR","GR","GR","JA","GR","GR")
+                end.rcode-->
+				
+				<br> <br/>
+				
+                Tabla con la proporción de las <b>Provincias</b>.<br> <br/>
+				
+                <!--begin.rcode
+                table(Provincia)
+                pie(table(Provincia), col=c("red","blue","yellow","green","purple"))
+                end.rcode-->
+				
+				También podemos mostrar el diagrama de sectores indicando los porcentajes de cada sector.<br> <br/>
+
+                <!--begin.rcode
+                slices <- c(10, 12, 4, 16, 8)
+                lbls <- c("US", "UK", "Australia", "Germany", "France")
+                pct <- round(slices/sum(slices)*100)
+                lbls <- paste(lbls, pct)
+                lbls <- paste(lbls,"%",sep="")
+                pie(slices,labels = lbls, col=rainbow(length(lbls)), main="Diagrama de sectores de Países")
+                end.rcode-->
+				
+				<hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.2">Diagramas de estrella</a></h3></font>
+				</body>
+				
+                La función <b>stars</b> realiza un diagrama de estrellas, una por individuo, con información de todas las variables.<br> <br/>
+
+                <!--begin.rcode   				
+                stars(matrix(c(Peso,Altura,Edad),ncol=3),main="Diagrama de estrellas")
+                stars(matrix(c(Peso,Altura,Edad),ncol=3),main="Diagrama de estrellas", draw.segments = TRUE)
+                detach(h.datos2)
+                end.rcode-->
+
+                A continuación se define la función Tarta, para eliminar la necesidad de realizar el conteo de frecuencias.<br> <br/>  
+				
+                <!--begin.rcode
+                Tarta<-function(var="")
+                    {
+                    if(var=="") 
+                      stop("Necesitas una variable")
+                    #x11()
+                    opar<-par(mfrow = c(2, 2))
+                    for(i in 1:(2 * 2))
+                      pie(table(var),col=c("red","blue","yellow","green","purple"))
+                    par<-opar
+                    }
+                Tarta(Provincia)
+				end.rcode-->
+                
+                Se puede modificar la función para que represente un número arbitrario de veces el gráfico, 
+				así como para comprobar que los parámetros son válidos.<br> <br/>
+
+                <!--begin.rcode
+                Tarta<-function(var="",filas=2,columnas=2)
+                    {
+                    if(var=="")
+                      stop("Necesitas una variable")
+                    filas <-as.integer(filas)
+                    columnas<-as.integer(columnas)
+                    if(filas<1) 
+                      stop("El numero de filas es < 1")
+                    if(columnas<1) 
+                      stop("El numero de columnas es < 1")
+                    #x11()
+                    opar<-par(mfrow = c(filas, columnas))
+                    for(i in 1:(filas * columnas))
+                      pie(table(var),col=c("red","blue","yellow","green","purple"))
+                    par<-opar
+                    }
+                #graphics.off()
+                Tarta(Provincia,3)
+                Tarta(Provincia,3,3)
+                Tarta(Provincia,,1)
+                Tarta(Provincia,1,1)
+                Tarta(Provincia,-1,1)
+                end.rcode-->
+				
+				<br> <br/><hr>
+				
+				<body>
+					<font color="#0B0B61"><h3><a name="6.3">Representaciones tridimensionales</a></h3></font>
+				</body>
+				
+                Es posible realizar gráficos tridimensionales mediante las funciones <b>persp</b>, <b>contour</b> e <b>image</b>. <br> <br/>
+				
+                <ol>
+                <li><b>persp</b> crea un gráfico en perspectiva.</li>
+                <li><b>contour</b> realiza un mapa de nivel.</li>
+                <li><b>image</b> dibuja una representación utilizando un código de color o una escala de grises.</li>
+                </ol>
+				
+                La función <b>Dibuja</b> realiza los tres tipos de representación. A continuación la utilizamos con dos 
+				funciones diferentes, una definida por su nombre y otra definida directamente.<br> <br/>
+
+                <!--begin.rcode
+                Seno<-function(x,y) sin(x*y)
+                Dibuja <- function(x = NA, y = NA, f = Seno)
+                {
+                #close.screen(all = T)
+                #win.graph()
+                #split.screen(c(1, 3))
+                #screen(1)
+                image(x, y, outer(x, y, f))
+                #screen(2)
+                contour(x, y, outer(x, y, f))
+                #screen(3)
+                persp(x, y, outer(x, y, f))
+                }
+                x<- -5:5
+                Dibuja(x,x)
+                par(mar=c(1,1,1,1))
+                Dibuja(x,x,function(x,y) sin(x)*cos(y))
+                end.rcode-->
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ej">
+		<div class="container">
+			<h1>Ejercicio Práctico</h1>
+			<p>
+                Para practicar con todos los conceptos aprendidos, usaremos las funciones estudiadas en los apartados anteriores
+                sobre un conjunto de datos a mi elección, sobre el cual realizaremos varias operaciones de representación de datos.<br> <br/>
+                
+				El conjunto de datos elegido se encuentra cargado en <b>R</b> y es el relativo al conjunto de datos <b>iris</b>. 
+				Es un conjunto de datos multivariante introducido por <b>Ronald Fisher</b> en un artículo de 1936 como un 
+				ejemplo de análisis discriminante lineal.<br> <br/>
+
+                Comencemos viendo el contenido de 10 muestras de los datos.<br> <br/>
+
+                <!--begin.rcode
+                head(iris, 10)  
+                end.rcode-->
+				
+				<br> <br/>	
+                      
+                El conjunto de datos contiene 50 muestras de cada una de tres especies de flor <b>Iris</b> (setosa, virginica y versicolor).
+				En él, se recogen las medidas de cuatro rasgos para cada muestra: el largo y ancho del sépalo y el largo y ancho del pétalo,
+				en centímetros. Basado en la combinación de estos cuatro rasgos, <b>Fisher</b> desarrolló un modelo discriminante lineal
+				para distinguir entre una especie y otra. <br> <br/>
+				
+				Para empezar, podemos mostrar un histograma de la frecuencia de una variable en el dataset, por ejemplo,
+				la longitud del sépalo. <br> <br/>
+				
+                <!--begin.rcode
+                hist(iris$Sepal.Length, col="red", xlab="Longitud del sépalo", ylab="Frecuencia", main="Histograma iris")
+                end.rcode-->
+				
+				<br> <br/>
+				
+                Haciendo un estudio general sobre como se relacionan dos características de las 4 que tenemos, podemos
+				observar por ejemplo que la longitud del pétalo y sépalo es directamente proporcional. Y que la anchura
+                del sépalo y pétalo, varían en un intervalo definido.<br> <br/>
+
+                <!--begin.rcode      
+                plot(x = iris$Sepal.Length, y = iris$Petal.Length)
+                lines(lowess(iris$Sepal.Length, iris$Petal.Length), col="red") 
+                end.rcode-->   
+
+                <!--begin.rcode      
+                plot(x = iris$Sepal.Width, y = iris$Petal.Width)
+                lines(lowess(iris$Sepal.Width, iris$Petal.Width), col="blue") 
+                end.rcode-->   				
+
+                <br> <br/>				
+				
+				Estas características nos servirán para poder clasificar los tres tipos de flores más adelante. <br> <br/>
+				
+                También podemos usar la función <b>pairs()</b> que nos informa sobre la correlación entre las variables del dataset.
+				Esta información se muestra como matriz de dispersión y permite ver como afectan las variables en la posterior
+				diferenciación de una especie y otra.<br> <br/>
+                                           
+                <!--begin.rcode      
+                panel.pearson <- function(x, y, ...) 
+                {
+                horizontal <- (par("usr")[1] + par("usr")[2]) / 2
+                vertical <- (par("usr")[3] + par("usr")[4]) / 2
+                text(horizontal, vertical, format(abs(cor(x,y)), digits=2))
+                }
+                pairs(iris[1:4], main = "Edgar Anderson's Iris Data", pch = 21, bg = c("red","green3","blue")[unclass(iris$Species)], upper.panel=panel.pearson)
+                end.rcode-->  
+
+                <br> <br/>				
+
+                Seguidamente usaremos el gráfico <b>boxplot</b> para ver el rango en el que se mueven las distintas especies según la
+                anchura del sépalo y además las diferenciaremos por colores para hacerlo más visual.<br> <br/>
+                    
+                <!--begin.rcode      
+                boxplot(Sepal.Width ~ Species, iris, las=1, xaxt="n", lwd=2, xlab="Species", ylab="Sepal Width", cex.lab=1.3, cex.axis=1.3, col=c("blue","red","green")) 
+                axis(side=1, cex.lab=1.0, at=c(1.0,2.0,3.0), labels=c("IRSE", "IRVE", "IRVI"))
+                legend("top", cex=0.8, bty="n", title="Species", c("I. setosa","I. versicolor","I. virginica"), fill=c("blue", "red","green"))
+                end.rcode--> 
+
+                <br> <br/>
+
+                Podemos extraer un subconjunto de la matriz de dispersión y observar como afecta la diferencia entre la anchura del pétalo
+                y sépalo que ya habíamos notado antes en la clasificación de las flores. <br> <br/>				
+
+                <!--begin.rcode
+                plot(Petal.Width ~ Sepal.Width, iris) 
+                par(las=0)
+                points(Petal.Width ~ Sepal.Width, subset(iris,Species=="setosa"),pch=1, col="red")
+                points(Petal.Width ~ Sepal.Width, subset(iris,Species=="versicolor"),pch=10, col="green")
+                points(Petal.Width ~ Sepal.Width, subset(iris,Species=="virginica"),pch=19, col="blue")
+                title(xlab="Sepal Width", ylab="Petal Width", col.lab="red")
+                legend("topleft", cex=0.8, bty="n", title="Species", c("I. setosa","I. versicolor","I. virginica"), fill=c("blue", "red","green"))
+                end.rcode--> 
+
+                <br> <br/>				
+
+                Finalmente y aunque en este ejemplo la proporción sea equivalente, podemos representar la proporción
+				de muestras de cada especie en un <b>diagrama de sectores</b>. <br> <br/>
+
+                <!--begin.rcode      
+                slices <- c(50, 50, 50)
+                lbls <- c("versicolor", "virginica", "setosa")
+                pct <- round(slices/sum(slices)*100)
+                lbls <- paste(lbls, pct)
+                lbls <- paste(lbls,"%",sep="")
+                pie(slices,labels = lbls, col=rainbow(length(lbls)),main="Proporción de cada especie")
+                end.rcode--> 
+
+                <br> <br/>				
+
+                Gracias a los gráficos podemos mejorar la visualización e interpretación de los conjuntos de datos
+				y facilitar la comprensión de temas complicados relativos a la estadística o probabilidad.
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ref">
+		<div class="container">
+			<h1>Referencias</h1>
+			<p>
+				<div class="caja">
+					<div class="color">
+
+						<p>	Referencias utilizadas en el desarrollo de esta entrega: 
+						</p>
+					</div>
+					<p>
+					Web para la obtención de gráficos para los datos: 
+					<a href="https://www.r-bloggers.com/box-plot-with-r-tutorial/">
+						https://www.r-bloggers.com/box-plot-with-r-tutorial/
+					</a>
+					</p>
+					
+					<p>
+					Web con diversos datasets en R: 
+					<a href="http://www.sthda.com/english/wiki/r-built-in-data-sets">
+						http://www.sthda.com/english/wiki/r-built-in-data-sets
+					</a>
+					</p>
+
+					<p>
+
+					Documento <i>'Curso R'</i> de la asignatura. 
+					
+					</p>	 
+				</div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional</h1>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="units-row">
+			    <div class="unit-50">
+			    	<p>Creado por Daniel Bolaños Martínez</p>
+			    </div>
+			    <div class="unit-50">
+					<ul class="social list-flat right">
+						<li><a href="mailto:danibolanos@correo.ugr.es"><i class="fa fa-send"></i></a></li>
+					</ul>
+			    </div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Javascript -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/typed.min.js"></script>
+    <script src="assets/js/kube.min.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script>
+		function newTyped(){}$(function(){$("#typed").typed({
+		// Change to edit type effect
+		strings: ["estadística", "computación"],
+
+		typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+    </script>
+</body>
+</html>
