@@ -1,2 +1,2 @@
-# Trabajos_EC
-Repositorio para los trabajos de la asignatura Estadística Computacional (Optativa del Grado de Matemáticas) 
+# Prácticas Estadística Computacional (EC)
+Repositorio para las Prácticas de la asignatura Estadística Computacional (Optativa del Grado de Matemáticas).
