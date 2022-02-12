@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+    <title>Estadística Computacional. Entrega 2.</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Draco is free PSD &amp; HTML template by @flamekaizar">
+    <meta name="author" content="Afnizar Nur Ghifari">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/kube.min.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/custom.min.css" />
+	<link rel="stylesheet" href="assets/arriba/fonts.css" />
+    <link rel="shortcut icon" href="assets/img/favicon.png" />
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC:700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="assets/arriba/arriba.js"></script>
+	<style>
+		.intro h1:before {
+			/* Edit this with your name or anything else */
+			content: 'UGR';
+		}
+	</style>
+	<body bgcolor="#F7F8E0">
+</head>
+
+<span class="ir-arriba icon-arrow-up2"></span>
+
+<body>
+	<!-- Navigation -->
+	<div class="main-nav">
+		<div class="container">
+			<header class="group top-nav">
+				<div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
+				    <span class="logo">DANI</span>
+				</div>
+			    <nav id="navbar-1" class="navbar item-nav">
+				    <ul>
+				        <li class="active"><a href="#about">Introducción</a></li>
+				        <li><a href="#experiences">Configuración "knitr"</a></li>
+				        <li><a href="#achievements">Simulación con baraja</a></li>
+				        <li><a href="#dados">Ejemplo: Dados</a></li>
+						<li><a href="#monedas">Ejemplo: Moneda</a></li>
+					    <li><a href="#epi">Epígrafes 3.5.6-3.5.8</a></li>
+						<li><a href="#ext">Archivos externos</a></li>
+						<li><a href="#ref">Referencias</a></li>
+				    </ul>
+				</nav>
+			</header>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional : entrega 2</h1>
+		</div>
+	</div>
+
+	<!-- Introduction -->
+	<div class="intro section" id="about">
+		<div class="container">
+			<p>Alumno: Daniel Bolaños Martínez</p>
+			<div class="units-row units-split wrap">
+				<div class="unit-20">
+					<img src="assets/img/ava.jpg" alt="Avatar">
+				</div>
+				<div class="unit-80">
+					<h1>Introducción<br><span id="typed"></span></h1>					
+				</div>
+				<p>
+				En el siguiente documento se mostrará el trabajo realizado para la primera tarea de la asignatura Estadística Computacional durante el periodo no presencial.<br> <br/>
+				Se adjuntarán el código de los ejercicios propuestos y las gráficas generadas a partir de los datos proporcionados.	
+				</p>				
+			</div>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="experiences">
+		<div class="container">
+			<h1>Configuración "knitr"</h1>
+			<p>
+			Para generar el archivo html que utilizaremos para presentar los datos, deberemos
+			instalar y cargar el paquete "knitr" para R. <br> <br/>
+
+			Utilizaremos las siguientes órdenes para ello: 
+
+<div class="chunk" id="hola"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># install.packages(&quot;knitr&quot;, dependencies = TRUE)</span>
+<span class="hl com"># library(knitr)</span>
+</pre></div>
+</div></div>
+
+			Para generar el archivo html, deberemos ejecutar la siguiente orden: <br> <br/>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># knit(&quot;danibolanos.Rhtml&quot;)</span>
+</pre></div>
+</div></div>
+			</p>
+		</div>
+	</div>
+
+	<!-- Award & Achievements -->
+	<div class="work section second" id="achievements">
+		<div class="container">
+			<h1>Simulación de una extracción de cartas de una baraja</h1>
+			<p>
+				Se hará una simulación del siguiente experimento: Realizar un muestreo con reemplazamiento de una baraja de 52 cartas, 
+				hasta obtener los cuatro ases e indicar el número de extracciones necesarias.
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.1">Con reemplazamiento</a></h3></font>
+				</body>
+
+				A continuación cargaremos la función <b>CuatroAses</b> y veremos su resultados para diferentes parámetros.<br> <br/>
+
+<div class="chunk" id="[metaórdenes]"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">CuatroAses</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">Mostrar</span> <span class="hl std">= F,</span><span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">1000</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+<span class="hl com">###############################################################</span>
+<span class="hl com"># Pone los cuatro ases en 0 #</span>
+<span class="hl com"># Saca una carta de la baraja (52) #</span>
+<span class="hl com"># Suma uno al contador #</span>
+<span class="hl com"># Si no es un as (1) vuelve al principio del ciclo #</span>
+<span class="hl com"># El as correspondiente se pone en 1 #</span>
+<span class="hl com"># Si los cuatro ases son 1 termina el ciclo #</span>
+<span class="hl com">###############################################################</span>
+<span class="hl std">Extracciones</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl std">Resultado</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">Maximo</span>
+<span class="hl std">Ases</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">)</span>
+<span class="hl kwa">repeat</span>
+<span class="hl std">{</span>
+  <span class="hl kwa">if</span> <span class="hl std">(Maximo</span> <span class="hl opt">&lt;=</span> <span class="hl std">Extracciones )</span>
+  <span class="hl std">{</span>
+        <span class="hl kwa">if</span><span class="hl std">(Mostrar)</span>
+        <span class="hl std">{</span>
+          <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;No he podido obtener cuatro ases en &quot;</span><span class="hl std">, Extracciones,</span> <span class="hl str">&quot;extracciones. \n&quot;</span><span class="hl std">)</span>
+        <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">=</span> <span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=F))</span>
+<span class="hl std">}</span>
+  <span class="hl std">Extracciones</span> <span class="hl kwb">=</span> <span class="hl std">Extracciones</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+  <span class="hl std">SacoUna</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">52</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">)</span>
+  <span class="hl std">Resultado[Extracciones]</span> <span class="hl kwb">=</span> <span class="hl std">SacoUna</span>
+  <span class="hl kwa">if</span><span class="hl std">(SacoUna</span> <span class="hl opt">%%</span> <span class="hl num">13</span> <span class="hl opt">!=</span> <span class="hl num">1</span><span class="hl std">) {</span><span class="hl kwa">next</span><span class="hl std">}</span>
+  <span class="hl com"># %% es el m´odulo</span>
+  <span class="hl std">Ases[(SacoUna</span> <span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">%/%</span> <span class="hl num">13</span> <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl com"># %/% es la divisi´on entera</span>
+  <span class="hl kwa">if</span><span class="hl std">(</span><span class="hl kwd">sum</span><span class="hl std">(Ases)</span><span class="hl opt">==</span><span class="hl num">4</span><span class="hl std">){</span><span class="hl kwa">break</span><span class="hl std">}</span>
+<span class="hl std">}</span>
+<span class="hl kwd">length</span><span class="hl std">(Resultado)</span> <span class="hl kwb">=</span> <span class="hl std">Extracciones</span>
+<span class="hl kwa">if</span><span class="hl std">(Mostrar)</span>
+<span class="hl std">{</span>
+  <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;He necesitado&quot;</span><span class="hl std">, Extracciones,</span> <span class="hl str">&quot;extracciones para obtener cuatro ases.\n&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
+<span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">= Extracciones,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=T))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Ejemplo mostrando los comentarios y con máximo 20 extracciones:<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-2"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">CuatroAses</span><span class="hl std">(T,</span><span class="hl num">20</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## No he podido obtener cuatro ases en  20 extracciones.
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] NA
+## 
+## $R
+##  [1]  5  3  3 21 42 48 31 12 21  6 30 37  9 51  8 30 16 26 31  7
+## 
+## $Conseguido
+## [1] FALSE
+</pre></div>
+</div></div>
+				
+				Ejemplo no mostrando los comentarios y con máximo 50 extracciones:<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-3"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">CuatroAses</span><span class="hl std">(F,</span><span class="hl num">50</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] NA
+## 
+## $R
+##  [1]  7 15 39 10 42  2  2 51 50  8  4 15 16 31  2  6 25 16 22 35 51 28 42 16  2
+## [26] 11  2 35  7 29 32 42 14 46  3  5 26 30  7 37 15 25 42 31 52 39 51 49 45 34
+## 
+## $Conseguido
+## [1] FALSE
+</pre></div>
+</div></div>
+
+				Se puede utilizar el resultado de la función como entrada de otra función, 
+				para repetir varias veces la simulación y estudiar la distribución de la misma.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-4"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">DistriAses</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span> <span class="hl std">=</span> <span class="hl num">5</span><span class="hl std">,</span><span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">1000</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+<span class="hl std">Saco</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">length</span><span class="hl std">=n)</span>
+<span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">n)</span>
+  <span class="hl std">Saco[i]</span> <span class="hl kwb">=</span> <span class="hl kwd">CuatroAses</span><span class="hl std">(F,Maximo)</span><span class="hl opt">$</span><span class="hl std">E</span>
+<span class="hl std">Saco</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Mostraremos diversas ejecuciones para la función <b>DistriAses</b>. En el primer ejemplo 
+				se realizan 4 experimentos con un máximo de 100 extracciones y en el segundo 6 experimentos con un máximo de 80.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-5"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">DistriAses</span><span class="hl std">(</span><span class="hl num">4</span><span class="hl std">,</span> <span class="hl num">100</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 32 38 40 NA
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-6"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">DistriAses</span><span class="hl std">(</span><span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">80</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] 69 NA NA NA NA 59
+</pre></div>
+</div></div>
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.2">Sin reemplazamiento</a></h3></font>
+				</body>
+
+				En el guión también podemos observar una función para realizar el experimento sin reemplazamiento con cada extracción.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-7"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">CuatroAses.Sin</span> <span class="hl kwb">=</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">Mostrar</span> <span class="hl std">= F)</span>
+<span class="hl std">{</span>
+<span class="hl com">#############################################################</span>
+<span class="hl com"># Pone el contador de ases en 0 #</span>
+<span class="hl com"># Obtiene una permutaci´on de las cartas de la baraja #</span>
+<span class="hl com"># Si no es un as (1) pasa a la siguiente carta #</span>
+<span class="hl com"># Suma 1 al contador de ases #</span>
+<span class="hl com"># Si hay cuatro ases termina el ciclo #</span>
+<span class="hl com">#############################################################</span>
+<span class="hl std">Ases</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl std">Resultado</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">52</span><span class="hl std">)</span>
+<span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">52</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+  <span class="hl kwa">if</span><span class="hl std">(Resultado[i]</span> <span class="hl opt">%%</span> <span class="hl num">13</span> <span class="hl opt">!=</span> <span class="hl num">1</span><span class="hl std">) {</span><span class="hl kwa">next</span><span class="hl std">}</span>
+  <span class="hl com"># %% es el m´odulo</span>
+  <span class="hl std">Ases</span> <span class="hl kwb">=</span> <span class="hl std">Ases</span><span class="hl opt">+</span><span class="hl num">1</span>
+  <span class="hl kwa">if</span><span class="hl std">(Ases</span><span class="hl opt">==</span><span class="hl num">4</span><span class="hl std">) {</span><span class="hl kwa">break</span><span class="hl std">}</span>
+<span class="hl std">}</span>
+<span class="hl kwa">if</span><span class="hl std">(Mostrar)</span>
+<span class="hl std">{</span>
+  <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;He necesitado&quot;</span><span class="hl std">, i,</span> <span class="hl str">&quot;extracciones para obtener cuatro ases\n&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
+<span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">= i,</span><span class="hl kwc">R</span> <span class="hl std">= Resultado[</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">i]))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Leemos la función <b>CuatroAses.Sin</b> y procedemos a ejecutar varias pruebas. 
+				Podemos ver que en esta ejecución tarda 33 extracciones en obtener los 4 ases de las 52 posibles.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-8"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">CuatroAses.Sin</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] 40
+## 
+## $R
+##  [1] 19 50 33 21 39 24 25 40 16 46 28 34 41  6 36  9 37 35  4 29 31  3 17 27 43
+## [26] 42 26  1 32 45 20 47 23 22 12 51 10 49  2 14
+</pre></div>
+</div></div>
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="3.3">Con nombres</a></h3></font>
+				</body>
+
+				En este ejemplo se añaden los nombres de las cartas a cada una, de esta forma 
+				en vez de asignar un número a cada carta se le asigna el número y el palo correspondientes.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-9"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">CuatroAses.Nombres</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">Mostrar</span> <span class="hl std">= F,</span><span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">1000</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+<span class="hl com">###############################################################</span>
+<span class="hl com"># Pone los cuatro ases en 0 #</span>
+<span class="hl com"># Saca una carta de la baraja (52) #</span>
+<span class="hl com"># Suma uno al contador #</span>
+<span class="hl com"># Si no es un as (1) vuelve al principio del ciclo #</span>
+<span class="hl com"># El as correspondiente se pone en 1 #</span>
+<span class="hl com"># Si los cuatro ases son 1 termina el ciclo #</span>
+<span class="hl com">###############################################################</span>
+<span class="hl std">Palos</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;Oros&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Copas&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Espadas&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Bastos&quot;</span><span class="hl std">)</span>
+<span class="hl std">Cartas</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl str">&quot;As&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Dos&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Tres&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Cuatro&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Cinco&quot;</span><span class="hl std">,</span>
+<span class="hl str">&quot;Seis&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Siete&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Ocho&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Nueve&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Diez&quot;</span><span class="hl std">,</span>
+<span class="hl str">&quot;Sota&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Caballo&quot;</span><span class="hl std">,</span><span class="hl str">&quot;Rey&quot;</span><span class="hl std">)</span>
+<span class="hl std">Extracciones</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl std">Resultado</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">Maximo</span>
+<span class="hl std">Ases</span> <span class="hl kwb">=</span> <span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">0</span><span class="hl std">)</span>
+<span class="hl std">Nombres</span> <span class="hl kwb">=</span> <span class="hl num">NA</span>
+<span class="hl kwa">repeat</span>
+<span class="hl std">{</span>
+  <span class="hl std">Extracciones</span> <span class="hl kwb">=</span> <span class="hl std">Extracciones</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+  <span class="hl kwa">if</span> <span class="hl std">(Maximo</span> <span class="hl opt">&lt;=</span> <span class="hl std">Extracciones )</span>
+  <span class="hl std">{</span>
+        <span class="hl kwa">if</span><span class="hl std">(Mostrar)</span>
+        <span class="hl std">{</span>
+          <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;No he podido obtener cuatro ases en &quot;</span><span class="hl std">, Extracciones,</span> <span class="hl str">&quot;extracciones. \n&quot;</span><span class="hl std">)</span>
+        <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">=</span> <span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">N</span><span class="hl std">=Nombres,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=F))</span>
+<span class="hl std">}</span>
+  <span class="hl std">SacoUna</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">52</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">)</span>
+  <span class="hl std">Resultado[Extracciones]</span> <span class="hl kwb">=</span> <span class="hl std">SacoUna</span>
+  <span class="hl std">Palo</span> <span class="hl kwb">=</span> <span class="hl std">((SacoUna</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">%/%</span> <span class="hl num">13</span> <span class="hl std">)</span><span class="hl opt">+</span> <span class="hl num">1</span>
+  <span class="hl std">Carta</span> <span class="hl kwb">=</span> <span class="hl std">((SacoUna</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">%%</span> <span class="hl num">13</span><span class="hl std">)</span><span class="hl opt">+</span><span class="hl num">1</span>
+  <span class="hl std">Nombres[Extracciones]</span> <span class="hl kwb">=</span> <span class="hl kwd">paste</span><span class="hl std">(Cartas[Carta],</span><span class="hl str">&quot; de &quot;</span><span class="hl std">, Palos[Palo])</span>
+  <span class="hl kwa">if</span><span class="hl std">(SacoUna</span> <span class="hl opt">%%</span> <span class="hl num">13</span> <span class="hl opt">!=</span> <span class="hl num">1</span><span class="hl std">) {</span><span class="hl kwa">next</span><span class="hl std">}</span>
+  <span class="hl com"># %% es el m´odulo</span>
+  <span class="hl std">Ases[(SacoUna</span> <span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">%/%</span> <span class="hl num">13</span> <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl com"># %/% es la divisi´on entera</span>
+  <span class="hl kwa">if</span><span class="hl std">(</span><span class="hl kwd">sum</span><span class="hl std">(Ases)</span><span class="hl opt">==</span><span class="hl num">4</span><span class="hl std">) {</span><span class="hl kwa">break</span><span class="hl std">}</span>
+<span class="hl std">}</span>
+<span class="hl kwd">length</span><span class="hl std">(Resultado)</span><span class="hl kwb">=</span><span class="hl std">Extracciones</span>
+<span class="hl kwa">if</span><span class="hl std">(Mostrar)</span>
+<span class="hl std">{</span>
+  <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;He necesitado&quot;</span><span class="hl std">, Extracciones,</span> <span class="hl str">&quot;extracciones para obtener cuatro ases.\n&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">=</span> <span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">N</span><span class="hl std">=Nombres,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=T))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-10"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">CuatroAses.Nombres</span><span class="hl std">(T,</span><span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## No he podido obtener cuatro ases en  10 extracciones.
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] NA
+## 
+## $R
+##  [1] 41 51 36  9 11 11 32 52 18 10
+## 
+## $N
+## [1] &quot;Dos  de  Bastos&quot;     &quot;Caballo  de  Bastos&quot; &quot;Diez  de  Espadas&quot;  
+## [4] &quot;Nueve  de  Oros&quot;     &quot;Sota  de  Oros&quot;      &quot;Sota  de  Oros&quot;     
+## [7] &quot;Seis  de  Espadas&quot;   &quot;Rey  de  Bastos&quot;     &quot;Cinco  de  Copas&quot;   
+## 
+## $Conseguido
+## [1] FALSE
+</pre></div>
+</div></div>
+			</p>
+		</div>
+	</div>
+
+	<!-- Work Experience -->
+	<div class="work section second" id="dados">
+		<div class="container">
+			<h1>Ejemplo: Dados</h1>
+			<p>
+				A continuación se presenta un ejemplo similar al de las cartas donde jugaremos con dos dados. 
+				La idea del experimento está basada en un juego de dados llamado <i>'Craps'</i> donde se juega con el valor obtenido en el lanzamiento de dados.<br> <br/>
+
+				En nuestro caso estudiaremos las probabilidades de obtener los denominados <i>'ojos de serpiente'</i> con los dados, 
+				es decir, un 2 como suma de dos dados o un 1 en cada dado. Este hecho en el juego puede ser muy bueno o muy malo dependiendo del rol 
+				del jugador por lo que resulta de interés estudiarlo.<br> <br/>
+
+				Hemos definido la función <b>DosDados</b> para controlar el experimento:
+
+<div class="chunk" id="unnamed-chunk-11"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">DosDados</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">Mostrar</span><span class="hl std">=F,</span> <span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">1000</span><span class="hl std">,</span> <span class="hl kwc">Total</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+
+<span class="hl com">###############################################################</span>
+<span class="hl com"># </span>
+<span class="hl com"># Experimentamos con el numero de lanzamientos necesarios</span>
+<span class="hl com"># para obtener un dos con dos dados</span>
+<span class="hl com">#</span>
+<span class="hl com"># Pone el contador de aciertos a 0</span>
+<span class="hl com"># Hacemos 2 lanzamientos y sumamos el resultado</span>
+<span class="hl com"># Incrementamos el numero de lanzamientos</span>
+<span class="hl com"># Si no es un 2 vuelve al principio del bucle</span>
+<span class="hl com"># Si es un 2 se incrementa el contador de aciertos</span>
+<span class="hl com"># Si conseguimos el total de aciertos requeridos salimos del bucle</span>
+<span class="hl com">#</span>
+<span class="hl com">###############################################################</span>
+
+<span class="hl std">Lanzamientos</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl std">Resultado</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">Maximo</span>
+<span class="hl std">Aciertos</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl kwa">repeat</span><span class="hl std">{</span>
+  <span class="hl std">Lanzamientos</span> <span class="hl kwb">=</span> <span class="hl std">Lanzamientos</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+  <span class="hl kwa">if</span> <span class="hl std">(Maximo</span> <span class="hl opt">&lt;=</span> <span class="hl std">Lanzamientos ){</span>
+        <span class="hl kwa">if</span><span class="hl std">(Mostrar){</span>
+           <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;No he podido obtener &quot;</span><span class="hl std">, Total ,</span> <span class="hl str">&quot;acierto(s) en &quot;</span><span class="hl std">, Lanzamientos,</span> <span class="hl str">&quot;lanzamientos. \n&quot;</span><span class="hl std">)</span>
+        <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">=</span> <span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=F))</span>
+  <span class="hl std">}</span>
+  <span class="hl std">TiraPrimerDado</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">, T)</span>
+  <span class="hl std">TiraSegundoDado</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">6</span><span class="hl std">,</span> <span class="hl num">1</span><span class="hl std">, T)</span>
+
+  <span class="hl std">Resultado[Lanzamientos]</span> <span class="hl kwb">=</span> <span class="hl std">TiraPrimerDado</span> <span class="hl opt">+</span> <span class="hl std">TiraSegundoDado</span>
+  <span class="hl kwa">if</span><span class="hl std">(Resultado[Lanzamientos]</span> <span class="hl opt">!=</span> <span class="hl num">2</span><span class="hl std">){</span><span class="hl kwa">next</span><span class="hl std">}</span>
+
+  <span class="hl std">Aciertos</span> <span class="hl kwb">=</span> <span class="hl std">Aciertos</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+
+  <span class="hl kwa">if</span><span class="hl std">(Aciertos</span> <span class="hl opt">==</span> <span class="hl std">Total){</span><span class="hl kwa">break</span><span class="hl std">}</span>
+<span class="hl std">}</span>
+<span class="hl kwd">length</span><span class="hl std">(Resultado)</span> <span class="hl kwb">=</span> <span class="hl std">Lanzamientos</span>
+
+<span class="hl kwa">if</span><span class="hl std">(Mostrar){</span>
+  <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;He necesitado&quot;</span><span class="hl std">, Lanzamientos,</span> <span class="hl str">&quot;lanzamientos para obtener&quot;</span><span class="hl std">, Total,</span> <span class="hl str">&quot;acierto(s) en el experimento\n&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
+
+<span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">= Lanzamientos,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=T))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Realizaremos algunas pruebas con la función definida para realizar 1 éxito en nuestro experimento para 20 lanzamientos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-12"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">DosDados</span><span class="hl std">(T,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## No he podido obtener  1 acierto(s) en  20 lanzamientos.
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] NA
+## 
+## $R
+##  [1] 10  4 10  8  8 11  6 10  4  9  7 12  8  3  5  5  7  5  3 20
+## 
+## $Conseguido
+## [1] FALSE
+</pre></div>
+</div></div>
+
+
+				También probaremos para realizar 2 éxitos en nuestro experimento para 50 lanzamientos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-13"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">DosDados</span><span class="hl std">(T,</span><span class="hl num">50</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## No he podido obtener  2 acierto(s) en  50 lanzamientos.
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] NA
+## 
+## $R
+##  [1]  2  3  8  8  7  5 10  8  7  5  4  7  6  5  6  6  5  9  8  6  7  7 12  7  3
+## [26] 10  9  7  9 11  7  6  7  5  7  4  7  8  6  6  7  4  7  5  5  7  7  8  7 50
+## 
+## $Conseguido
+## [1] FALSE
+</pre></div>
+</div></div>
+
+				Al igual que hicimos con las cartas, podemos definir una función que realice varios experimentos y muestre su distribución. 
+				La llamaremos <b>DistriDados</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-14"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">DistriDados</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">100</span><span class="hl std">,</span> <span class="hl kwc">Total</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+<span class="hl std">Lanzo</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">length</span><span class="hl std">=n)</span>
+  <span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">n)</span>
+        <span class="hl std">Lanzo[i]</span> <span class="hl kwb">=</span> <span class="hl kwd">DosDados</span><span class="hl std">(F,Maximo,Total)</span><span class="hl opt">$</span><span class="hl std">E</span>
+  <span class="hl std">Lanzo</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Podemos observar un resumen de los datos y observar el histograma de la distribución con las órdenes <b>summary()</b> y <b>hist()</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-15"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">Distribucion</span> <span class="hl kwb">=</span> <span class="hl kwd">DistriDados</span><span class="hl std">()</span>
+<span class="hl kwd">summary</span><span class="hl std">(Distribucion)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##    2.00   14.00   33.00   29.71   41.50   62.00       3
+</pre></div>
+</div></div>
+
+				A continuación mostraremos el histograma generado para 10 experimentos realizados con un máximo de 100 
+				lanzamientos para obtener un total de 1 acierto en cada uno de ellos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-16"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(Distribucion)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-16-1.png" title="plot of chunk unnamed-chunk-16" alt="plot of chunk unnamed-chunk-16" class="plot" /></div></div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="monedas">
+		<div class="container">
+			<h1>Ejemplo: Moneda</h1>
+			<p>
+				Esta vez el experimento consiste en lanzar una moneda y ver el número de caras (valor 1) seguidos que obtenemos en un número máximo de lanzamientos.<br> <br/>
+
+				Para el experimento valoraremos el número de 1 que obtenemos seguidos. Si durante los lanzamientos obtenemos una cruz (valor 0) 
+				reseteamos el experimento manteniendo el recuento de de lanzamientos que llevemos hasta el momento.<br> <br/>
+
+				Hemos definido la función <b>LanzaMoneda</b> para controlar el experimento:
+
+<div class="chunk" id="unnamed-chunk-17"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">LanzaMoneda</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">Mostrar</span><span class="hl std">=F,</span> <span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">Total</span><span class="hl std">=</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+
+<span class="hl com">###############################################################</span>
+<span class="hl com"># </span>
+<span class="hl com"># Experimentamos con el numero de caras seguidas</span>
+<span class="hl com"># obtenidas en el lanzamiento de una moneda</span>
+<span class="hl com">#</span>
+<span class="hl com"># Pone el contador de aciertos a 0</span>
+<span class="hl com"># Hacemos 1 lanzamiento 0 cruz 1 cara</span>
+<span class="hl com"># Incrementamos el numero de lanzamientos</span>
+<span class="hl com"># Si sale 1 cara se incrementa el contador de aciertos</span>
+<span class="hl com"># Si sale 1 cruz los aciertos pasan a 0</span>
+<span class="hl com"># Si conseguimos el total de aciertos seguidos salimos del bucle</span>
+<span class="hl com">#</span>
+<span class="hl com">###############################################################</span>
+
+<span class="hl std">Lanzamientos</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl std">Resultado</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">Maximo</span>
+<span class="hl std">Aciertos</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl kwa">repeat</span><span class="hl std">{</span>
+  <span class="hl std">Lanzamientos</span> <span class="hl kwb">=</span> <span class="hl std">Lanzamientos</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+  <span class="hl kwa">if</span> <span class="hl std">(Maximo</span> <span class="hl opt">&lt;=</span> <span class="hl std">Lanzamientos){</span>
+        <span class="hl kwa">if</span><span class="hl std">(Mostrar){</span>
+          <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;No he podido obtener&quot;</span><span class="hl std">, Total ,</span> <span class="hl str">&quot;caras en&quot;</span><span class="hl std">, Lanzamientos,</span> <span class="hl str">&quot;lanzamientos. \n&quot;</span><span class="hl std">)</span>
+        <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">=</span> <span class="hl num">NA</span><span class="hl std">,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=F))</span>
+<span class="hl std">}</span>
+<span class="hl std">LanzaMoneda</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">),</span> <span class="hl num">1</span><span class="hl std">, T)</span>
+
+<span class="hl std">Resultado[Lanzamientos]</span> <span class="hl kwb">=</span> <span class="hl std">LanzaMoneda</span>
+<span class="hl kwa">if</span><span class="hl std">(Resultado[Lanzamientos]</span> <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl std">){</span>
+  <span class="hl std">Aciertos</span> <span class="hl kwb">=</span> <span class="hl std">Aciertos</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+<span class="hl std">}</span>
+
+<span class="hl kwa">else</span><span class="hl std">{</span>
+  <span class="hl std">Aciertos</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+<span class="hl std">}</span>
+
+<span class="hl kwa">if</span><span class="hl std">(Aciertos</span> <span class="hl opt">==</span> <span class="hl std">Total){</span><span class="hl kwa">break</span><span class="hl std">}</span>
+<span class="hl std">}</span>
+<span class="hl kwd">length</span><span class="hl std">(Resultado)</span> <span class="hl kwb">=</span> <span class="hl std">Lanzamientos</span>
+
+<span class="hl kwa">if</span><span class="hl std">(Mostrar){</span>
+  <span class="hl kwd">cat</span><span class="hl std">(</span><span class="hl str">&quot;He necesitado&quot;</span><span class="hl std">, Lanzamientos,</span> <span class="hl str">&quot;lanzamientos para obtener&quot;</span><span class="hl std">, Total,</span> <span class="hl str">&quot;caras seguidas\n&quot;</span><span class="hl std">)</span>
+<span class="hl std">}</span>
+
+<span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">E</span> <span class="hl std">= Lanzamientos,</span> <span class="hl kwc">R</span> <span class="hl std">= Resultado,</span> <span class="hl kwc">Conseguido</span><span class="hl std">=T))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Realizaremos algunas pruebas con la función definida para conseguir 2 caras seguidas para 10 lanzamientos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-18"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">LanzaMoneda</span><span class="hl std">(T,</span><span class="hl num">10</span><span class="hl std">,</span><span class="hl num">2</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## He necesitado 3 lanzamientos para obtener 2 caras seguidas
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] 3
+## 
+## $R
+## [1] 0 1 1
+## 
+## $Conseguido
+## [1] TRUE
+</pre></div>
+</div></div>
+
+				También probaremos para conseguir 3 caras seguidas en nuestro experimento para 30 lanzamientos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-19"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">LanzaMoneda</span><span class="hl std">(T,</span><span class="hl num">30</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## He necesitado 8 lanzamientos para obtener 3 caras seguidas
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] 8
+## 
+## $R
+## [1] 1 1 0 1 0 1 1 1
+## 
+## $Conseguido
+## [1] TRUE
+</pre></div>
+</div></div>
+
+				Al igual que hicimos con las cartas y los dados, podemos definir una función que realice varios 
+				experimentos y muestre su distribución. La llamaremos <b>DistriMoneda</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-20"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">DistriMoneda</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">n</span><span class="hl std">=</span><span class="hl num">10</span><span class="hl std">,</span> <span class="hl kwc">Maximo</span><span class="hl std">=</span><span class="hl num">20</span><span class="hl std">,</span> <span class="hl kwc">Total</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+<span class="hl std">Lanzo</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">length</span><span class="hl std">=n)</span>
+<span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">n)</span>
+  <span class="hl std">Lanzo[i]</span> <span class="hl kwb">=</span> <span class="hl kwd">LanzaMoneda</span><span class="hl std">(F,Maximo,Total)</span><span class="hl opt">$</span><span class="hl std">E</span>
+<span class="hl std">Lanzo</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Podemos observar un resumen de los datos y observar el histograma de la distribución con las órdenes <b>summary()</b> y <b>hist()</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-21"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">Distribucion</span> <span class="hl kwb">=</span> <span class="hl kwd">DistriMoneda</span><span class="hl std">()</span>
+<span class="hl kwd">summary</span><span class="hl std">(Distribucion)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    2.00    3.00    4.00    4.30    4.75    9.00
+</pre></div>
+</div></div>
+
+				A continuación mostraremos el histograma generado para 10 experimentos realizados con un máximo de 20 
+				lanzamientos para obtener un total de 2 aciertos en cada uno de ellos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-22"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(Distribucion)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-22-1.png" title="plot of chunk unnamed-chunk-22" alt="plot of chunk unnamed-chunk-22" class="plot" /></div></div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="epi">
+		<div class="container">
+			<h1>Epígrafes 3.5.6 al 3.5.8</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="6.1">Función Suma de potencias</a></h3></font>
+				</body>
+
+				En primer lugar aparece una función que calcula la suma de los cuadrados y cubos de las componentes de un vector, y los devuelve en un vector.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-23"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sumpot</span><span class="hl kwb">=</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">){</span>
+  <span class="hl std">s2</span> <span class="hl kwb">=</span> <span class="hl kwd">sum</span><span class="hl std">(x</span><span class="hl opt">^</span><span class="hl num">2</span><span class="hl std">)</span>
+  <span class="hl std">s3</span> <span class="hl kwb">=</span> <span class="hl kwd">sum</span><span class="hl std">(x</span><span class="hl opt">^</span><span class="hl num">3</span><span class="hl std">)</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">cuadrados</span><span class="hl std">=s2,</span><span class="hl kwc">cubos</span><span class="hl std">=s3))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				A continuación realizaremos algunos ejemplos sobre la función <b>sumpot</b> definida en el guión.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-24"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sumpot</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">5</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $cuadrados
+## [1] 55
+## 
+## $cubos
+## [1] 225
+</pre></div>
+</div></div>
+
+				A continuación se modifica la definición, añadiendo un segundo argumento que, predeterminadamente, da el mismo resultado, 
+				pero que permite obtener las sumas de otras potencias. A esta función la llamaremos <b>sumpot2</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-25"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">sumpot2</span><span class="hl kwb">=</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">potencias</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+  <span class="hl std">L</span><span class="hl kwb">=</span><span class="hl kwd">length</span><span class="hl std">(potencias)</span>
+  <span class="hl std">resultado</span><span class="hl kwb">=</span><span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl str">&quot;list&quot;</span><span class="hl std">,</span><span class="hl kwc">length</span><span class="hl std">=L)</span>
+  <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl std">L) resultado[[i]]</span><span class="hl kwb">=</span><span class="hl kwd">sum</span><span class="hl std">(x</span><span class="hl opt">^</span><span class="hl std">potencias[i])</span>
+  <span class="hl kwd">return</span><span class="hl std">(resultado)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-26"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">sumpot2</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">5</span><span class="hl std">,</span><span class="hl kwd">c</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">3</span><span class="hl std">))</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [[1]]
+## [1] 55
+## 
+## [[2]]
+## [1] 225
+</pre></div>
+</div></div>
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.2">Función en una cuadrícula</a></h3></font>
+				</body>
+
+				La siguiente función genera una cuadrícula sobre un conjunto de ordenadas (x) y abscisas (y) y, 
+				para cada punto de esa cuadrícula, calcula la distancia hasta el origen de coordenadas.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-27"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">distancia.origen</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+  <span class="hl std">puntos</span><span class="hl kwb">=</span><span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl kwd">length</span><span class="hl std">(x),</span><span class="hl kwd">length</span><span class="hl std">(y))</span>
+  <span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(x))</span>
+  <span class="hl std">{</span>
+        <span class="hl kwa">for</span> <span class="hl std">(j</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(y))</span>
+        <span class="hl std">{</span>
+          <span class="hl std">puntos[i,j]</span><span class="hl kwb">=</span><span class="hl kwd">sqrt</span><span class="hl std">(x[i]</span><span class="hl opt">^</span><span class="hl num">2</span><span class="hl opt">+</span><span class="hl std">y[j]</span><span class="hl opt">^</span><span class="hl num">2</span><span class="hl std">)</span>
+        <span class="hl std">}</span>
+  <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(puntos)</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-28"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">distancia.origen</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">3</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##          [,1]     [,2]     [,3] [,4]     [,5]     [,6]     [,7]
+## [1,] 3.162278 2.236068 1.414214    1 1.414214 2.236068 3.162278
+## [2,] 3.605551 2.828427 2.236068    2 2.236068 2.828427 3.605551
+## [3,] 4.242641 3.605551 3.162278    3 3.162278 3.605551 4.242641
+## [4,] 5.000000 4.472136 4.123106    4 4.123106 4.472136 5.000000
+</pre></div>
+</div></div>
+
+				También podemos escribir una definición alternativa utilizando la forma general del producto 
+				exterior. Funciona de igual manera ofreciendo los mismos resultados.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-29"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">distancia.ORIGEN</span> <span class="hl kwb">=</span> <span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">){</span>
+  <span class="hl kwd">outer</span><span class="hl std">(x,y,</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">x</span><span class="hl std">,</span><span class="hl kwc">y</span><span class="hl std">)</span> <span class="hl kwd">sqrt</span><span class="hl std">(x</span><span class="hl opt">^</span><span class="hl num">2</span><span class="hl opt">+</span><span class="hl std">y</span><span class="hl opt">^</span><span class="hl num">2</span><span class="hl std">))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-30"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">distancia.ORIGEN</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">4</span><span class="hl std">,</span><span class="hl opt">-</span><span class="hl num">3</span><span class="hl opt">:</span><span class="hl num">3</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##          [,1]     [,2]     [,3] [,4]     [,5]     [,6]     [,7]
+## [1,] 3.162278 2.236068 1.414214    1 1.414214 2.236068 3.162278
+## [2,] 3.605551 2.828427 2.236068    2 2.236068 2.828427 3.605551
+## [3,] 4.242641 3.605551 3.162278    3 3.162278 3.605551 4.242641
+## [4,] 5.000000 4.472136 4.123106    4 4.123106 4.472136 5.000000
+</pre></div>
+</div></div>
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.3">Procesos no lineales</a></h3></font>
+				</body>
+
+				Las tres funciones siguientes corresponden a procesos no lineales descritos en <b>Dong</b> que, de forma sencilla, definen estructuras complejas.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-31"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dong1</span><span class="hl kwb">=</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">numero</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+  <span class="hl std">x</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= numero)</span>
+  <span class="hl std">y</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= numero)</span>
+  <span class="hl std">x[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl std">y[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero)</span>
+  <span class="hl std">{</span>
+        <span class="hl kwa">if</span><span class="hl std">(</span><span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">2</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span> <span class="hl opt">==</span> <span class="hl num">2</span><span class="hl std">)</span>
+          <span class="hl std">{m</span> <span class="hl kwb">=</span> <span class="hl num">1</span><span class="hl std">}</span>
+        <span class="hl kwa">else</span>
+          <span class="hl std">{m</span> <span class="hl kwb">=</span> <span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">}</span>
+        <span class="hl std">x[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.5</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.5</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl std">m</span>
+        <span class="hl std">y[i]</span> <span class="hl kwb">=</span> <span class="hl opt">-</span><span class="hl num">0.5</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.5</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl std">m</span>
+  <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero],</span> <span class="hl kwc">y</span> <span class="hl std">= y[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero]))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-32"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dong2</span><span class="hl kwb">=</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">numero</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+  <span class="hl std">x</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= numero)</span>
+  <span class="hl std">y</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= numero)</span>
+  <span class="hl std">x[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl std">y[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero)</span>
+  <span class="hl std">{</span>
+        <span class="hl std">a</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">3</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span>
+        <span class="hl kwa">if</span><span class="hl std">(a</span> <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl std">)</span>
+        <span class="hl std">{</span>
+          <span class="hl std">m</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+          <span class="hl std">n</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+        <span class="hl std">}</span>
+        <span class="hl kwa">else</span>
+        <span class="hl std">{</span>
+          <span class="hl kwa">if</span><span class="hl std">(a</span> <span class="hl opt">==</span> <span class="hl num">2</span><span class="hl std">)</span>
+          <span class="hl std">{</span>
+                <span class="hl std">m</span> <span class="hl kwb">=</span> <span class="hl num">0.5</span>
+                <span class="hl std">n</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+          <span class="hl std">}</span>
+          <span class="hl kwa">else</span>
+          <span class="hl std">{</span>
+                <span class="hl std">m</span> <span class="hl kwb">=</span> <span class="hl num">0.25</span>
+                <span class="hl std">n</span> <span class="hl kwb">=</span> <span class="hl num">0.5</span>
+          <span class="hl std">} }</span>
+        <span class="hl std">x[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.5</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl std">m</span>
+        <span class="hl std">y[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.5</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl std">n</span>
+  <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero],</span> <span class="hl kwc">y</span> <span class="hl std">= y[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero]))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+<div class="chunk" id="unnamed-chunk-33"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">dong3</span><span class="hl kwb">=</span><span class="hl kwa">function</span><span class="hl std">(</span><span class="hl kwc">numero</span> <span class="hl std">=</span> <span class="hl num">100</span><span class="hl std">)</span>
+<span class="hl std">{</span>
+  <span class="hl std">x</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= numero)</span>
+  <span class="hl std">y</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">(</span><span class="hl kwc">mode</span> <span class="hl std">=</span> <span class="hl str">&quot;numeric&quot;</span><span class="hl std">,</span> <span class="hl kwc">length</span> <span class="hl std">= numero)</span>
+  <span class="hl std">x[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl std">y[</span><span class="hl num">1</span><span class="hl std">]</span> <span class="hl kwb">=</span> <span class="hl num">1</span>
+  <span class="hl kwa">for</span><span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero)</span>
+  <span class="hl std">{</span>
+        <span class="hl std">a</span> <span class="hl kwb">=</span> <span class="hl kwd">sample</span><span class="hl std">(</span><span class="hl num">100</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span>
+        <span class="hl kwa">if</span><span class="hl std">(a</span> <span class="hl opt">==</span> <span class="hl num">1</span><span class="hl std">)</span>
+        <span class="hl std">{</span>
+          <span class="hl std">x[i]</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+          <span class="hl std">y[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.25</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span>
+        <span class="hl std">}</span>
+        <span class="hl kwa">else</span>
+        <span class="hl std">{</span>
+          <span class="hl kwa">if</span><span class="hl std">(a</span> <span class="hl opt">&lt;=</span> <span class="hl num">86</span><span class="hl std">)</span>
+          <span class="hl std">{</span>
+                <span class="hl std">x[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.85</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.04</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span>
+                <span class="hl std">y[i]</span> <span class="hl kwb">=</span> <span class="hl opt">-</span><span class="hl num">0.04</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.85</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">1.6</span>
+          <span class="hl std">}</span>
+          <span class="hl kwa">else</span>
+          <span class="hl std">{</span>
+                <span class="hl kwa">if</span><span class="hl std">(a</span> <span class="hl opt">&lt;=</span> <span class="hl num">93</span><span class="hl std">)</span>
+                <span class="hl std">{</span>
+                  <span class="hl std">x[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.2</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">-</span> <span class="hl num">0.26</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span>
+                  <span class="hl std">y[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.26</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.22</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span>
+                <span class="hl std">}</span>
+                <span class="hl kwa">else</span>
+                <span class="hl std">{</span>
+                  <span class="hl std">x[i]</span> <span class="hl kwb">=</span> <span class="hl opt">-</span><span class="hl num">0.15</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.28</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span>
+                  <span class="hl std">y[i]</span> <span class="hl kwb">=</span> <span class="hl num">0.26</span> <span class="hl opt">*</span> <span class="hl std">x[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">0.24</span> <span class="hl opt">*</span> <span class="hl std">y[i</span> <span class="hl opt">-</span> <span class="hl num">1</span><span class="hl std">]</span> <span class="hl opt">+</span> <span class="hl num">1</span>
+                <span class="hl std">} } }</span>
+  <span class="hl std">}</span>
+  <span class="hl kwd">return</span><span class="hl std">(</span><span class="hl kwd">list</span><span class="hl std">(</span><span class="hl kwc">x</span> <span class="hl std">= x[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero],</span> <span class="hl kwc">y</span> <span class="hl std">= y[</span><span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">numero]))</span>
+<span class="hl std">}</span>
+</pre></div>
+</div></div>
+
+				Realizaremos una prueba para cada función <b>dong1, dong2, dong3</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-34"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">dong1</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $x
+## [1]  0.0000 -1.5000 -2.5000 -0.7500  1.5000  2.8750  1.1250  0.6875  1.1250
+## 
+## $y
+## [1] -1.0000 -1.5000 -1.0000  1.7500  2.2500  1.3750 -1.7500 -0.4375  0.4375
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">dong2</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $x
+## [1] 1.0000000 0.7500000 0.8750000 0.6875000 0.3437500 0.4218750 0.4609375
+## [8] 0.4804688 0.4902344
+## 
+## $y
+## [1] 0.5000000 0.7500000 0.3750000 0.6875000 0.3437500 0.6718750 0.8359375
+## [8] 0.9179688 0.9589844
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">dong3</span><span class="hl std">(</span><span class="hl num">10</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $x
+## [1] -0.0600000 -0.0318000  0.0533860  0.1777826  0.3275736 -1.3235690 -1.0746117
+## [8] -0.8044436 -0.5254278
+## 
+## $y
+## [1] 0.480000 2.010400 3.310112 4.411460 5.342629 1.260548 2.724408 3.958731
+## [9] 4.997099
+</pre></div>
+</div></div>
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="6.4">Lista de búsqueda y entornos</a></h3></font>
+				</body>
+
+				Podemos encontrar todos los lugares donde se encuentran objetos con las funciones <b>search</b> y <b>searchpaths</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-35"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">search</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;.GlobalEnv&quot;        &quot;package:knitr&quot;     &quot;package:stats&quot;    
+##  [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+##  [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
+## [10] &quot;package:base&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">searchpaths</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;.GlobalEnv&quot;                                     
+##  [2] &quot;C:/Users/Dani/Documents/R/win-library/3.6/knitr&quot;
+##  [3] &quot;C:/Program Files/R/R-3.6.2/library/stats&quot;       
+##  [4] &quot;C:/Program Files/R/R-3.6.2/library/graphics&quot;    
+##  [5] &quot;C:/Program Files/R/R-3.6.2/library/grDevices&quot;   
+##  [6] &quot;C:/Program Files/R/R-3.6.2/library/utils&quot;       
+##  [7] &quot;C:/Program Files/R/R-3.6.2/library/datasets&quot;    
+##  [8] &quot;C:/Program Files/R/R-3.6.2/library/methods&quot;     
+##  [9] &quot;Autoloads&quot;                                      
+## [10] &quot;C:/PROGRA~1/R/R-36~1.2/library/base&quot;
+</pre></div>
+</div></div>
+
+				Estas funciones devuelven un vector con la lista de libros y objetos de R que están en uso actualmente.<br> <br/>
+
+				Con las funciones <b>ls</b> y <b>get</b> podemos buscar y recuperar objetos de las sesiones anteriores.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-36"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">ls</span><span class="hl std">(</span><span class="hl num">1</span><span class="hl std">,</span><span class="hl kwc">pa</span><span class="hl std">=</span><span class="hl str">&quot;Dados&quot;</span><span class="hl std">)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## [1] &quot;DistriDados&quot; &quot;DosDados&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">get</span><span class="hl std">(</span><span class="hl str">&quot;DosDados&quot;</span><span class="hl std">,)</span> <span class="hl kwb">-&gt;</span> <span class="hl std">MM</span>
+<span class="hl kwd">MM</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">## $E
+## [1] 6
+## 
+## $R
+## [1]  8  7  6  4 10  2
+## 
+## $Conseguido
+## [1] TRUE
+</pre></div>
+</div></div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ext">
+		<div class="container">
+			<h1>Uso de archivos externos</h1>
+			<p>
+				<body>
+					<font color="#0B0B61"><h3><a name="7.1">Ejercicio: Lectura de hojas de datos</a></h3></font>
+				</body>
+
+				Existen diversas funciones que permiten leer datos de un archivo y almacenarlos directamente en una 
+				hoja de datos. Los datos del archivo deben estar en forma de tabla y se creará una hoja de datos con el mismo número 
+				de variables que campos o columnas haya en el archivo y con el mismo número de filas que líneas haya en el archivo.<br> <br/> 
+
+				Nos centraremos en las funciones <b>read</b> y utilizaremos los datos aportados en los siguientes enlaces proporcionados:<br> <br/>
+
+				<a href="http://www.ugr.es/local/andresgc/Datos.txt">
+						http://www.ugr.es/local/andresgc/Datos.txt
+					</a>
+				, 
+				<a href="http://www.ugr.es/local/andresgc/Datos2.txt">
+						http://www.ugr.es/local/andresgc/Datos2.txt
+					</a><br> <br/>
+				 
+				 En primer lugar, leemos los datos con la función <b>read.csv</b> y <b>read.table</b> almacenamos su valor en una matriz.<br> <br/>
+				 
+<div class="chunk" id="unnamed-chunk-37"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">datos1</span> <span class="hl kwb">=</span> <span class="hl kwd">read.csv</span><span class="hl std">(</span><span class="hl str">&quot;http://www.ugr.es/local/andresgc/Datos.txt&quot;</span><span class="hl std">,</span><span class="hl kwc">header</span><span class="hl std">=T,</span> <span class="hl kwc">sep</span><span class="hl std">=</span><span class="hl str">&quot;,&quot;</span><span class="hl std">)</span>
+
+<span class="hl std">datos2</span> <span class="hl kwb">=</span> <span class="hl kwd">read.table</span><span class="hl std">(</span><span class="hl str">&quot;http://www.ugr.es/local/andresgc/Datos2.txt&quot;</span><span class="hl std">,</span><span class="hl kwc">header</span><span class="hl std">=T)</span>
+</pre></div>
+</div></div>
+
+				Podemos ver un resumen de los datos con la función <b>summary</b> utilizada anteriormente.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-38"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(datos1)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##       Peso           Altura           Edad           Sexo   
+##  Min.   :55.00   Min.   :155.0   Min.   :21.00   Hombre:20  
+##  1st Qu.:62.00   1st Qu.:164.5   1st Qu.:21.00   Mujer :16  
+##  Median :71.50   Median :174.0   Median :22.00              
+##  Mean   :70.72   Mean   :172.9   Mean   :22.14              
+##  3rd Qu.:78.25   3rd Qu.:181.0   3rd Qu.:23.00              
+##  Max.   :89.00   Max.   :190.0   Max.   :25.00
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">summary</span><span class="hl std">(datos2)</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##             Nombre       Peso          Altura           Edad       Sexo 
+##  Adela         :1   Min.   :47.0   Min.   :1.600   Min.   :22.00   H:7  
+##  Alberto Garcia:1   1st Qu.:58.0   1st Qu.:1.630   1st Qu.:23.00   M:7  
+##  Andres Garces :1   Median :65.0   Median :1.675   Median :25.50        
+##  Diego Moreno  :1   Mean   :67.5   Mean   :1.699   Mean   :25.93        
+##  Juan Trucha   :1   3rd Qu.:76.5   3rd Qu.:1.762   3rd Qu.:26.00        
+##  Juana Garcia  :1   Max.   :89.0   Max.   :1.850   Max.   :42.00        
+##  (Other)       :8
+</pre></div>
+</div></div>
+
+				También podemos mostrar el histograma por variable para cada conjunto de datos utilizando la función <b>hist</b> de la siguiente forma:<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-39"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(datos1</span><span class="hl opt">$</span><span class="hl std">Altura,</span> <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl str">&quot;Altura datos 1&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-39-1.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">hist</span><span class="hl std">(datos2</span><span class="hl opt">$</span><span class="hl std">Peso,</span> <span class="hl kwc">main</span><span class="hl std">=</span><span class="hl str">&quot;Peso datos 2&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-39-2.png" title="plot of chunk unnamed-chunk-39" alt="plot of chunk unnamed-chunk-39" class="plot" /></div></div>
+
+				También utilizaremos algunas funciones derivadas de <b>plot</b> como <b>barplot</b> y <b>boxplot</b> 
+				que generan gráficos diferentes para cada conjunto de datos.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-40"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">barplot</span><span class="hl std">(datos1</span><span class="hl opt">$</span><span class="hl std">Altura)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-40-1.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(datos1)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-40-2.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">boxplot</span><span class="hl std">(datos1)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-40-3.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">barplot</span><span class="hl std">(datos2</span><span class="hl opt">$</span><span class="hl std">Peso)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-40-4.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">plot</span><span class="hl std">(datos2)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-40-5.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" class="plot" /></div><div class="rcode">
+<div class="source"><pre class="knitr r"><span class="hl kwd">boxplot</span><span class="hl std">(datos2)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-40-6.png" title="plot of chunk unnamed-chunk-40" alt="plot of chunk unnamed-chunk-40" class="plot" /></div></div>
+				
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="7.2">Gestión de objetos</a></h3></font>
+				</body>
+
+				Existen diferentes funciones que permiten almacenar y recuperar objetos, unas son binarias (rápidas y exactas) 
+				y otras textuales (legibles por el usuario y compatibles entre plataformas y versiones del lenguaje).<br> <br/>
+
+				En el siguiente ejemplo creamos un vector de números y los guardamos en una variable, seguidamente escribimos 
+				su contenido en un archivo de texto y borramos la variable que almacena el vector. 
+				Finalmente lo recuperamos leyendo desde el archivo txt.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-41"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl std">(</span><span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">10</span><span class="hl std">)</span><span class="hl opt">^</span><span class="hl num">2</span>
+<span class="hl std">x</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]   1   4   9  16  25  36  49  64  81 100
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl kwd">write</span><span class="hl std">(x,</span><span class="hl kwc">file</span><span class="hl std">=</span><span class="hl str">&quot;x.txt&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">rm</span><span class="hl std">(x)</span>
+<span class="hl std">x</span>
+</pre></div>
+<div class="error"><pre class="knitr r">## Error in eval(expr, envir, enclos): objeto 'x' no encontrado
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl std">x</span> <span class="hl kwb">&lt;-</span> <span class="hl kwd">scan</span><span class="hl std">(</span><span class="hl str">&quot;x.txt&quot;</span><span class="hl std">)</span>
+<span class="hl std">x</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1]   1   4   9  16  25  36  49  64  81 100
+</pre></div>
+</div></div>
+
+				<br> <br/><hr>
+
+				<body>
+					<font color="#0B0B61"><h3><a name="7.3">Ejercicio: Función library</a></h3></font>
+				</body>
+
+				La función <b>library</b> gestiona los libros de la biblioteca, dando información sobre los existentes y cargándolos en memoria o
+				descargándolos de la misma.<br> <br/>
+
+				Probaremos a cargar y descargar libros tal y como se nos indica en el guión:<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-42"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">search</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;.GlobalEnv&quot;        &quot;package:knitr&quot;     &quot;package:stats&quot;    
+##  [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+##  [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
+## [10] &quot;package:base&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># library()</span>
+</pre></div>
+</div></div>
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/11.jpg" alt="Captura" >
+						</td>
+					</tr>
+				</table>
+
+<div class="chunk" id="unnamed-chunk-43"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">library</span><span class="hl std">(</span><span class="hl str">&quot;parallel&quot;</span><span class="hl std">)</span>
+<span class="hl kwd">search</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;.GlobalEnv&quot;        &quot;package:parallel&quot;  &quot;package:knitr&quot;    
+##  [4] &quot;package:stats&quot;     &quot;package:graphics&quot;  &quot;package:grDevices&quot;
+##  [7] &quot;package:utils&quot;     &quot;package:datasets&quot;  &quot;package:methods&quot;  
+## [10] &quot;Autoloads&quot;         &quot;package:base&quot;
+</pre></div>
+<div class="source"><pre class="knitr r"><span class="hl com"># library(help=&quot;parallel&quot;)</span>
+</pre></div>
+</div></div>
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/12.jpg" alt="Captura2" >
+						</td>
+					</tr>
+				</table>
+
+<div class="chunk" id="unnamed-chunk-44"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># help(&quot;mclapply&quot;)</span>
+</pre></div>
+</div></div>
+
+				<table border="2" align="center" bordercolor="black">
+					<tr>
+						<td>
+					<img src="./figure/13.jpg" alt="Captura3" >
+						</td>
+					</tr>
+				</table>
+
+<div class="chunk" id="unnamed-chunk-45"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">detach</span><span class="hl std">(</span><span class="hl kwc">pos</span><span class="hl std">=</span><span class="hl num">2</span><span class="hl std">)</span>
+<span class="hl kwd">search</span><span class="hl std">()</span>
+</pre></div>
+<div class="output"><pre class="knitr r">##  [1] &quot;.GlobalEnv&quot;        &quot;package:knitr&quot;     &quot;package:stats&quot;    
+##  [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+##  [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
+## [10] &quot;package:base&quot;
+</pre></div>
+</div></div>
+
+				Finalmente para descargar el libro hacemos uso de la función <b>detach()</b>.<br> <br/>
+
+				También podemos instalar paquetes que descarguemos de la web e instalarlos de la misma forma que los paquetes vistos con la orden <b>library()</b>.<br> <br/>
+
+<div class="chunk" id="unnamed-chunk-46"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl com"># install.packages(&quot;package's name&quot;)</span>
+<span class="hl com"># library(&quot;package's name&quot;)</span>
+</pre></div>
+</div></div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Work Experience -->
+	<div class="work section second" id="ref">
+		<div class="container">
+			<h1>Referencias</h1>
+			<p>
+				<div class="caja">
+					<div class="color">
+
+						<p>	Referencias utilizadas en el desarrollo de esta entrega: 
+						</p>
+					</div>
+
+					<p>
+					Web para la obtención de gráficos para los datos: 
+					<a href="https://www.r-bloggers.com/box-plot-with-r-tutorial/">
+						https://www.r-bloggers.com/box-plot-with-r-tutorial/
+					</a>
+					</p>
+
+					<p>
+
+					Documento <i>'Curso R'</i> de la asignatura. 
+					
+					</p>	 
+				</div>
+			</p>
+		</div>
+	</div>
+	
+	<!-- Quote -->
+	<div class="quote">
+		<div class="container text-centered">
+			<h1>estadística computacional</h1>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="units-row">
+			    <div class="unit-50">
+			    	<p>Creado por Daniel Bolaños Martínez</p>
+			    </div>
+			    <div class="unit-50">
+					<ul class="social list-flat right">
+						<li><a href="mailto:danibolanos@correo.ugr.es"><i class="fa fa-send"></i></a></li>
+					</ul>
+			    </div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Javascript -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/typed.min.js"></script>
+    <script src="assets/js/kube.min.js"></script>
+    <script src="assets/js/site.js"></script>
+    <script>
+		function newTyped(){}$(function(){$("#typed").typed({
+		// Change to edit type effect
+		strings: ["estadística", "computación"],
+
+		typeSpeed:90,backDelay:700,contentType:"html",loop:!0,resetCallback:function(){newTyped()}}),$(".reset").click(function(){$("#typed").typed("reset")})});
+    </script>
+</body>
+</html>
